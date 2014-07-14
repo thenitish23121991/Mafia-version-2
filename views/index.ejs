@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mafia</title>
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="left_container">
+<div class="home_title">
+RULES:
+</div>
+<div class="home_content_container">
+<ul>
+<li>9 players + 1 god</li>
+<li>3 mafias, 3 citizens, 1 dacoit, 1 healer, 1 detective</li>
+<li>Roles randomnly assigned. Nobody knows who is who expect about self</li>
+<li>Objective of mafias is to kill citizens and of citizens is to kill  mafias</li>
+<li>Detective and healer support citizens and dacoits support mafias</li>
+<li>Mafias can kill at night including self when prompted by god</li>
+<li>Healer can heal as well as kill only once during the entire game at night when prompted by god. Healer can kill/heal self</li>
+<li>Detective can suspect somebody at night when prompted by god to find out if the suspect is a mafia</li>
+<li>During the day dacoit could kill someone he suspects to be a citizen by suicide bombing at any point of the game. However, dacoit too will die</li>
+<li>Voting will happen during the day in which mafias objective is to vote out citizens and vice versa for citizens</li>
+<li>Voted out persons will be given one chance to explain themselves and again votes will be called</li>
+<li>A chat window will be provided for discussions/strategy planning among players</li>
+</ul>
+</div>
+</div>
+
+<div class="middle_container">
+<div class="middle_game_container">
+M<span class="mafia_black">A</span>F<span class="mafia_black">I</span>A
+</div>
+<div class="middle_nick_container">
+<input type="text" name="middle_nick_input" class="middle_nick_input" placeholder="Choose a nickname" />
+</div>
+<div class="middle_home_start_container centered">
+<button name="middle_home_start_button" class="middle_home_start_button slide_up_button"><span>START</span></button>
+</div>
+<div class="middle_other_container">
+<button name="middle_facebook_button" class="slide_up_button middle_facebook_button"><span>Login with Facebook</span></button>
+</div>
+</div>
+
+<div class="right_container">
+<div class="home_title">
+GUIDELINES:
+</div>
+<div class="home_content_container">
+<ul>
+<li>If you are a mafia you will know other mafias when you are first prompted by god. Use this to your advantage and discuss with other mafias</li>
+<li>Discussions in chat window will happen mostly during the day for everybody. Carefully read the arguments of everybody to figure out who is who</li>
+<li>Dacoit, if is convinced of somebody being a citizen should kill him by suicide bombing</li>
+<li>In case of network disconnects or time delay in player’s prompt a default behavior is registered. You can come back to where you left when your network reconnects.</li>
+<li>Deception and trickery are key to winning this game. Use them to your advantage</li>
+</ul>
+</div>
+</div>
+
+<div class="footer">
+
+</div>
+
+</div>
+
+<script type="text/javascript" src="javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="javascripts/common.js"></script>
+
+</body>
+</html>
