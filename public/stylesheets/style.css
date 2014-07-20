@@ -234,16 +234,20 @@ float:left;
 overflow:hidden;
 }
 .right_game_container{
-width:14%;
-float:left;
-margin-top:-62px;
-position:relative;
+width:210px;
+position:absolute;
+top:0px;
+min-height:130px;
+height:100%;
+right:0%;
+
+z-index:10001;
 }
 .right_game_chat_container, .right_game_chat_player_container, .right_game_chat_player_name{
-width:100%;
+width:210px;
 }
-.right_game_chat_player_container{
-
+.right_game_chat_player_container, .right_game_chat_container{
+height:100%;
 }
 .right_game_chat_player_name{
 height:52px;
@@ -256,6 +260,7 @@ font-family:'LatoLight';
 background:#fff;
 position:relative;
 cursor:pointer;
+width:210px;
 }
 .left_game_announcement_title{
 font-size:21px;
@@ -313,7 +318,9 @@ margin-right:53px;
 .left_game_chat_messages_container{
 padding:14px 27px;
 }
-
+.right_game_chat_player_name:hover{
+background:rgba(0,0,0,.06);
+}
 .middle_home_start_container{
 padding:15px 0px;
 padding-bottom:9px;

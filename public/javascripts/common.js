@@ -36,9 +36,9 @@ data:{name:name}
 
 add_game.done(function(data){
 
-console.log(data);
-if(data == 'game added'){
-location.href = '/screen2';
+var game1 = data.name;
+if(game1 != ''){
+location.href = '/screen2?game='+game1;
 }
 
 });

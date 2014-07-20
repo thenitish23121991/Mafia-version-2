@@ -2,13 +2,31 @@
 
 $(document).ready(function(){
 
-$('.middle_start_new_game_button').bind('click',function(){
+$('.middle_start_new_game_button_screen2').bind('click',function(){
 
-location.href = '/game';
+var game_name = $('.top_game_title').text();
+game_name = game_name.trim();
+
+var is_game_ready = $.ajax({
+url:"/is_game_ready",
+type:"POST",
+data:{game_name:game_name}
 });
 
 
-var game = $('.top_game_title').val();
+is_game_ready.done(function(data){
+
+if(data != 'game not ready'){
+location.href = '/game?game='+data;
+
+}
+
+});
+
+});
+
+var game = $('.top_game_title').text();
+game = game.trim();
 
 var get_game_players = $.ajax({
 url:"/get_game_players",
@@ -20,13 +38,35 @@ data:{game:game}
 get_game_players.done(function(data){
 
 var game_players_data;
+console.log(data);
 
-$.each(data,function(key,value){
+$.each(data[0].users,function(key,value){
 game_players_data += '<div class="middle_games_show_person_name">'+value['name']+'</div>';
 });
 
 game_players_data = game_players_data.replace("undefined","");
-$('.middle_games_show_person').html(game_players_data);
+$('.middle_games_show_container').html(game_players_data);
+
+});
+
+
+
+$('.invite_fb_friends_button').bind('click',function(){
+
+var game_name = $('.top_game_title').text();
+game_name = game_name.trim();
+
+var add_player_to_game = $.ajax({
+url:"/add_player_to_game",
+type:"POST",
+data:{game_name:game_name}
+});
+
+
+add_player_to_game.done(function(data){
+
+
+});
 
 });
 

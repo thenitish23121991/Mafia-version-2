@@ -74,7 +74,32 @@ app.use(function(err, req, res, next) {
 
 
 
+function get_current_role(game,user,req){
+console.log('get current role');
+game1.get_current_role(game,user,function(docs1){
+req.session.current_role = docs1;
+console.log('role:'+req.session.current_role);
+});
+}
 
+app.post('/get_current_role',function(req,res){
+console.log('get current role post');
+var game = req.body.game;
+var current_user = req.session.current_user;
+console.log(current_user);
+get_current_role(game,user,req);
+//res.send(req.session.current_role);
+});
+
+
+app.post('/get_current_user_role',function(req,res){
+var game_name = req.body.game_name;
+var player_name = req.session.current_user; 
+game1.get_current_role(game_name,player_name,function(docs2){
+console.log('docs2'+docs2);
+res.send(docs2);
+});
+});
 
 
 app.get('/',function(req,res){
@@ -91,12 +116,23 @@ res.render('screen1');
 
 
 app.get('/screen2',function(req,res){
-res.render('screen2');
+var game_name = req.query.game;
+if(req.session.current_user != 'undefined'){
+res.render('screen2',{game_name:game_name});
+}
+else{
+res.render('/');
+}
 });
 
 
 app.get('/game',function(req,res){
-res.render('game');
+var game_name = req.query.game;
+game1.get_game_info(game_name,function(data){
+var game_users = data[0].users;
+console.log(data);
+res.render('game',{game_name:game_name,game_users:game_users});
+});
 });
 
 
@@ -119,7 +155,7 @@ var name = req.body.name;
 console.log('game : '+name);
 var current_user = req.session.current_user;
 game1.add_game(name,current_user,function(docs){
-res.send('game added');
+res.send(docs);
 });
 });
 
@@ -148,13 +184,86 @@ res.send(req.session.current_user);
 
 app.post('/get_live_games',function(req,res){
 game1.get_live_games(function(docs){
-console.log(docs);
+console.log('live games: '+docs);
 res.send(docs);
 });
 });
 
 
+app.post('/add_player_to_game',function(req,res){
+var game_name = req.body.game_name;
+var player_name = req.session.current_user;
+console.log('current player: '+player_name);
+game1.add_player_to_game(game_name,player_name,function(docs){
+console.log(docs[0].users);
+});
+setTimeout(function(){
+get_current_role(game_name,player_name,req);
+},2000);
+});
 
+
+
+app.post('/get_mafia_answers',function(req,res){
+var game = req.body.game_name;
+if(req.session.current_user){
+
+}else{
+
+}
+});
+
+
+app.post('/assign_players',function(req,res){
+var game = req.body.game_name;
+//game1.assign_mafias(game);
+game1.assign_players(game,function(data){
+console.log(data);
+});
+});
+
+app.post('/is_game_ready',function(req,res){
+var game = req.body.game_name;
+console.log('is game ready called');
+game1.is_game_ready(game,function(data){
+if(data == 'game ready'){
+req.session.current_game = game;
+console.log('session: '+req.session.current_game);
+res.send(game);
+}else{
+res.send('game not ready');
+}
+
+});
+});
+
+app.post('/add_mafia_answer',function(req,res){
+var answer = req.body.answer;
+var player = req.session.current_user;
+var game = req.body.game;
+console.log(game);
+game1.add_mafia_answer(game,answer,player,function(data){
+console.log(data);
+if(data[0].mafia_answers.length == 3){
+game1.mafia_answer_result(data[0].mafia_answers,function(docs12){
+callback(docs12);
+});
+}
+//res.send(data);
+});
+});
+
+app.post('/kill_person',function(req,res){
+var game = req.body.game;
+var current_user = req.session.current_user;
+var status = req.body.status;
+game1.kill_person(game,current_user,'dead',function(data12){
+
+});
+});
+
+
+//game1.assign_mafias('nitish123');
 
 
 module.exports = app;
