@@ -2,6 +2,8 @@
 
 $(document).ready(function(){
 
+
+
 $('.middle_games_show_person_name').bind('click',function(){
 
 $(this).parent('.middle_games_show_person').css({

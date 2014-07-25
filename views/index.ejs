@@ -68,8 +68,73 @@ GUIDELINES:
 </div>
 
 <script type="text/javascript" src="javascripts/jquery.min.js"></script>
+
+<script>
+
+window.fbAsyncInit = function(){
+FB.init({
+appId:'762188780523189',
+cookie:true,
+status:true,
+xfbml:true,
+version:'v2.0'
+});
+
+
+$('.middle_facebook_button').bind('click',function(){
+
+FB.getLoginStatus(function(response){
+
+if(response.status == 'connected'){
+FB.api('/me',function(response){
+
+var nick = response.name;
+
+var add_nick = $.ajax({
+url:"/add_nick",
+type:"POST",
+data:{nick:nick}
+}); 
+
+add_nick.done(function(data){
+
+location.href = '/screen1';
+
+}); 
+
+});
+console.log(response);
+}else if(response.status == 'not_authorized'){
+FB.login();
+}else{
+FB.login();
+}
+
+});
+
+});
+
+};
+
+
+
+
+(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  
+   
+  
+  
+</script>
+
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 <script type="text/javascript" src="javascripts/common.js"></script>
+<script type="text/javascript" src="javascripts/index.js"></script>
 
 </body>
 </html>

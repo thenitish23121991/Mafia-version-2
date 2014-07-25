@@ -155,6 +155,7 @@ var name = req.body.name;
 console.log('game : '+name);
 var current_user = req.session.current_user;
 game1.add_game(name,current_user,function(docs){
+console.log(docs);
 res.send(docs);
 });
 });
@@ -241,12 +242,14 @@ app.post('/add_mafia_answer',function(req,res){
 var answer = req.body.answer;
 var player = req.session.current_user;
 var game = req.body.game;
-console.log(game);
+var answer_result;
+//console.log(game);
 game1.add_mafia_answer(game,answer,player,function(data){
-console.log(data);
+console.log(data[0].mafia_answers.length);
 if(data[0].mafia_answers.length == 3){
 game1.mafia_answer_result(data[0].mafia_answers,function(docs12){
-callback(docs12);
+answer_result = docs12;
+res.send(answer_result);
 });
 }
 //res.send(data);
@@ -262,6 +265,217 @@ game1.kill_person(game,current_user,'dead',function(data12){
 });
 });
 
+
+app.post('/inform_city',function(req,res){
+var game = req.body.game;
+game1.inform_city(game,function(docs122){
+res.send(docs122);
+});
+});
+
+
+app.post('/start_first_vote',function(req,res){
+var game = req.body.game;
+game1.start_first_vote(game,function(docs111){
+if(docs111[0].final_vote.length == 9){
+
+}else{
+
+}
+});
+});
+
+app.post('/start_final_vote',function(req,res){
+var game = req.body.game;
+game1.start_final_vote(game,function(docs111){
+if(docs111[0].final_vote.length == 9){
+
+}else{
+
+}
+});
+});
+
+
+app.post('/add_game_message',function(req,res){
+var game = req.body.game;
+var message = req.body.message;
+var player = req.session.current_user;
+game1.get_current_role(game,player,function(docs121){
+console.log(docs121);
+game1.add_game_message(game,player,docs121,message,function(docs1121){
+res.send(docs1121);
+});
+});
+});
+
+app.post('/get_game_messages',function(req,res){
+var game = req.body.game;
+var player = req.session.current_user;
+game1.get_current_role(game,player,function(docs12){
+game1.get_game_messages(game,docs12,function(docs1212){
+res.send(docs1212);
+});
+});
+});
+
+
+app.post('/get_mafia_answer',function(req,res){
+var game = req.body.game;
+game1.get_game_info(game,function(data12112){
+var answers = data12112[0].mafia_answers;
+console.log('answers: '+answers);
+game1.mafia_answer_result(answers,function(docs1212){
+console.log(docs1212);
+res.send(docs1212);
+});
+});
+});
+
+
+app.post('/has_healer_killed',function(req,res){
+var game = req.body.game;
+game1.has_healer_killed(game,function(docs1211){
+res.send(docs1211);
+});
+});
+
+app.post('/has_healer_healed',function(req,res){
+var game = req.body.game;
+game1.has_healer_healed(game,function(docs1211){
+res.send(docs1211);
+});
+});
+
+app.post('/add_healer_answer',function(req,res){
+var game = req.body.game;
+var player = req.body.player;
+console.log('add healer answer: '+game+' + '+player);
+game1.add_healer_answer(game,player,function(docs1211){
+res.send('healer answer added');
+});
+});
+
+
+app.post('/has_mafias_answered',function(req,res){
+console.log('app answered called');
+var game = req.body.game;
+game1.has_mafia_answered(game,function(docs121){
+console.log('in app: '+docs121);
+res.send(docs121);
+});
+});
+
+app.post('/add_healer_heal',function(req,res){
+console.log('add healer heal');
+var game = req.body.game;
+var player = req.body.player;
+game1.add_healer_healed(game,player,function(docs121){
+res.send('healer has healed');
+console.log('healer has healed');
+});
+});
+
+app.post('/has_healer_answered',function(req,res){
+var game = req.body.game;
+game1.has_healer_answered(game,function(docs121){
+console.log(docs121);
+res.send(docs121);
+});
+});
+
+
+app.post('/add_healer_answered',function(req,res){
+
+});
+
+
+app.post('/add_detective_answer',function(req,res){
+var game = req.body.game;
+var answer = req.body.answer;
+game1.add_detective_answer(game,answer,function(docs12){
+res.send(docs12);
+});
+});
+
+app.post('/has_detective_answered',function(req,res){
+var game = req.body.game;
+game1.has_detective_answered(game,function(docs121){
+res.send(docs121);
+});
+});
+
+
+app.post('/is_suspect_correct',function(req,res){
+var game = req.body.game;
+var suspect = req.body.suspect;
+game1.is_suspect_correct(game,suspect,function(data121){
+res.send(data121);
+});
+});
+
+
+app.post('/get_killed_players',function(req,res){
+var game = req.body.game;
+game1.get_killed_players(game,function(data311){
+res.send(data311);
+});
+});
+
+
+app.post('/dacoit_kill_person',function(req,res){
+var game = req.body.game;
+var answer = req.body.answer;
+var user = req.session.current_user;
+game1.dacoit_kill_person(game,user,answer,function(data11111){
+
+});
+});
+
+app.post('/add_first_vote',function(req,res){
+var game = req.body.game;
+var vote_answer = req.body.vote_answer;
+var player = req.session.current_user;
+console.log('game: '+game+' vote_answer: '+vote_answer+' player: '+player);
+game1.add_first_vote(game,player,vote_answer,function(data131){
+res.send(data131);
+});
+});
+
+
+app.post('/get_first_vote_result',function(req,res){
+var game = req.body.game;
+game1.get_first_vote_result(game,function(data151){
+res.send(data151);
+});
+});
+
+
+app.post('/is_first_vote_done',function(req,res){
+var game = req.body.game;
+game1.is_first_vote_done(game,function(data121){
+console.log(data121);
+res.send(data121);
+});
+});
+
+app.post('/final_answer_add',function(req,res){
+var game = req.body.game;
+var answer = req.body.answer;
+var player = req.session.current_user;
+console.log('add final vote');
+game1.add_final_answer(game,player,answer,function(data171){
+res.send(data171);
+});
+});
+
+app.post('/is_final_vote_done',function(req,res){
+var game = req.body.game;
+game1.is_final_vote_done(game,function(data1211){
+console.log(data1211);
+res.send(data1211);
+});
+});
 
 //game1.assign_mafias('nitish123');
 

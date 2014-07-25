@@ -96,5 +96,28 @@ GUIDELINES:
 <script type="text/javascript" src="javascripts/common.js"></script>
 <script type="text/javascript" src="javascripts/screen2.js"></script>
 
+
+<script src="http://connect.facebook.net/en_US/all.js"></script>
+<script>
+FB.init({
+appId:'762188780523189',
+cookie:true,
+status:true,
+xfbml:true
+});
+
+function FacebookInviteFriends()
+{
+FB.ui({
+method: 'apprequests',
+message: 'Hey, lets play this cool game.'
+});
+}
+
+$('.invite_fb_friends_button').bind('click',function(){
+FacebookInviteFriends();
+});
+</script>
+
 </body>
 </html>

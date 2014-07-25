@@ -345,6 +345,7 @@ font-family:'LatoLight';
 padding:7px 0px;
 font-family:'BGMedium';
 font-size:18px;
+cursor:pointer;
 }
 .middle_games_show_container, .middle_invited_games_names{
 padding:12px 0px;
@@ -521,4 +522,55 @@ padding-top:23px;
 .game_bottom_start_again_button{
 background:#00b488;
 text-align:center;
+}
+.game_lightbox{
+position:fixed;
+top:36%;
+left:34%;
+height:24%;
+width:28%;
+padding:2%;
+text-align:center;
+opacity:0;
+pointer-events:none;
+z-index:-5;
+background:#3c948b;
+font-family:'LatoLight';
+font-size:19px;
+color:#fff;
+
+-webkit-transition:all .2s ease;
+-moz-transition:all .2s ease;
+-ms-transition:all .2s ease;
+-o-transition:all .2s ease;
+
+-webkit-transform:rotateY(180deg);
+-moz-transform:rotateY(180deg);
+-ms-transform:rotateY(180deg);
+-o-transform:rotateY(180deg);
+}
+.game_lightbox.visible{
+opacity:1;
+pointer-events:auto;
+z-index:100001;
+-webkit-transform:rotateY(0deg);
+-moz-transform:rotateY(0deg);
+-ms-transform:rotateY(0deg);
+-o-transform:rotateY(0deg);
+}
+.game_lightbox_body{
+width:100%;
+height:80%;
+}
+.game_lightbox_buttons{
+width:100%;
+height:20%;
+}
+.ask_mafia_yes{
+width:50%;
+height:100%;
+}
+.ask_mafia_no{
+width:50%;
+height:100%;
 }

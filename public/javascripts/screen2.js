@@ -53,6 +53,9 @@ $('.middle_games_show_container').html(game_players_data);
 
 $('.invite_fb_friends_button').bind('click',function(){
 
+
+
+/*
 var game_name = $('.top_game_title').text();
 game_name = game_name.trim();
 
@@ -67,6 +70,8 @@ add_player_to_game.done(function(data){
 
 
 });
+
+*/
 
 });
 
