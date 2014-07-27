@@ -465,6 +465,7 @@ var answer = req.body.answer;
 var player = req.session.current_user;
 console.log('add final vote');
 game1.add_final_answer(game,player,answer,function(data171){
+console.log('add final answer: '+data171);
 res.send(data171);
 });
 });
@@ -474,6 +475,39 @@ var game = req.body.game;
 game1.is_final_vote_done(game,function(data1211){
 console.log(data1211);
 res.send(data1211);
+});
+});
+
+app.post('/has_game_ended',function(req,res){
+var game = req.body.game;
+game1.has_game_ended(game,function(data181){
+res.send(data181);
+});
+});
+
+
+app.post('/start_game_cycle',function(req,res){
+var game = req.body.game;
+game1.start_game_cycle(game,function(data101){
+res.send(data101);
+});
+});
+
+
+app.post('/init_mafia',function(req,res){
+var game = req.body.game;
+game1.init_mafia(game,function(data171){
+console.log(data171);
+res.send(data171);
+});
+});
+
+
+app.post('/init_votes',function(req,res){
+var game = req.body.game;
+game1.init_votes(game,function(data171){
+console.log(data171);
+res.send(data171);
 });
 });
 
