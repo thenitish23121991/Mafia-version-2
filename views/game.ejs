@@ -14,7 +14,7 @@
 GOD
 </div>
 <% for(var i=0;i<game_users.length;i++){ %>
-<div class="right_game_chat_player_name player_alive">
+<div class="right_game_chat_player_name player_<%= game_users[i].status %>">
 <%= game_users[i].name %>
 </div>
 <% } %>

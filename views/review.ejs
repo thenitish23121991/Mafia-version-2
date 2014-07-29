@@ -9,16 +9,25 @@
 
 <div class="game_container">
 
+<div class="game_hidden_container" style="display:none;">
+<%= game %>
+</div>
+
 <div class="game_top_container">
 GAME OVER
 </div>
 
 <div class="game_bottom_container">
+<% for(var i=0;i<game_users.length;i++){ %>
 <div class="game_bottom_result">
-<span class="game_bottom_result_name">NITISH</span>
+<span class="game_bottom_result_name"><%= game_users[i].name %></span>
 <span class="game_bottom_result_icon">-></span>
-<span class="game_bottom_result_role">MAFIA</span>
+<span class="game_bottom_result_role"><%= game_users[i].role %></span>
 </div>
+
+<% } %>
+
+<!--
 
 <div class="game_bottom_result">
 <span class="game_bottom_result_name">ASHISH</span>
@@ -67,6 +76,9 @@ GAME OVER
 <span class="game_bottom_result_icon">-></span>
 <span class="game_bottom_result_role">HEALER</span>
 </div>
+
+-->
+
 </div>
 
 <div class="game_bottom_start_again">

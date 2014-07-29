@@ -137,7 +137,12 @@ res.render('game',{game_name:game_name,game_users:game_users});
 
 
 app.get('/review',function(req,res){
-res.render('review');
+var game = req.query.game;
+game1.get_game_info(game,function(data191){
+var game_users = data191[0].users;
+console.log(game_users);
+res.render('review',{game:game,game_users:game_users});
+});
 });
 
 
@@ -508,6 +513,72 @@ var game = req.body.game;
 game1.init_votes(game,function(data171){
 console.log(data171);
 res.send(data171);
+});
+});
+
+
+app.post('/has_mafia_voted',function(req,res){
+var game = req.body.game;
+var player = req.session.current_user;
+game1.has_mafia_voted(game,user,function(data191){
+res.send(data191);
+});
+});
+
+
+app.post('/has_user_voted_first',function(req,res){
+var game = req.body.game;
+var player = req.session.current_user;
+game1.has_user_voted_first(game,player,function(data191){
+res.send(data191);
+});
+});
+
+
+app.post('/has_user_voted_final',function(req,res){
+var game = req.body.game;
+var player = req.session.current_user;
+game1.has_user_voted_final(game,player,function(data191){
+res.send(data191);
+});
+});
+
+
+app.post('/get_first_votes_result',function(req,res){
+var game = req.body.game;
+game1.get_first_user_vote_results(game,function(data1212){
+console.log(data1212);
+res.send(data1212);
+});
+});
+
+
+app.post('/get_final_votes_results',function(req,res){
+var game = req.body.game;
+game1.get_final_user_vote_results(game,function(data1212){
+game1.update_final_vote_results(data1212,function(data1312){
+console.log('final vote results in app: '+data1212);
+res.send(data1212);
+});
+});
+});
+
+
+app.post('/dacoit_killed',function(req,res){
+var game = req.body.game; 
+var killed = req.body.killed;
+var player = req.session.current_user;
+game1.dacoit_killed(game,player,killed,function(data181){
+
+});
+});
+
+
+app.post('/get_game_results',function(req,res){
+var game = req.body.game;
+game1.get_game_result(game,function(data191){
+console.log(data191);
+res.send(data191);
 });
 });
 

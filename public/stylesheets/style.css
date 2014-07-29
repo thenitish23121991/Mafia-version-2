@@ -288,7 +288,7 @@ background:#34ad00;
 .right_game_chat_player_name.player_alive.sleeping:before{
 background:#ff7200;
 }
-.right_game_chat_player_name.player_alive.dead:before{
+.right_game_chat_player_name.player_dead:before{
 background:rgba(0,0,0,.12);
 }
 .game_container{

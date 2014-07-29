@@ -9,6 +9,7 @@ var has_healer_interval;
 var has_detective_interval;
 var is_first_vote_done;
 var is_first_vote,is_final_vote_done,final_vote_done_interval;
+var get_final_vote_results;
 
 var game_announcement = $('.left_game_announcement');
 var game = $('.left_game_title_container').text();
@@ -80,8 +81,25 @@ is_first_vote.done(function(data1212){
 console.log(data1212);
 
 if(data1212 == 'first vote done'){
-start_explain_yourself_method();
+
+
 clearInterval(is_first_vote_done);
+
+var get_first_vote_results = $.ajax({
+url:"/get_first_votes_result",
+type:"POST",
+data:{game:game}
+});
+
+get_first_vote_results.done(function(data141){
+console.log(data141);
+data141.forEach(function(element,index){
+game_announcement.append(data141[index]+' is dead.');
+});
+
+});
+
+start_explain_yourself_method();
 
 var start_explain_yourself = setTimeout(function(){
 start_final_vote();
@@ -96,8 +114,20 @@ is_final_vote_done.done(function(data12111){
 console.log(data12111);
 if(data12111 == 'final vote done'){
 console.log('final vote done');
-
 clearInterval(final_vote_done_interval);
+
+var get_final_vote_results = $.ajax({
+url:"/get_final_votes_results",
+type:"POST",
+data:{game:game}
+});
+
+get_final_vote_results.done(function(data1912){
+console.log(data1912);
+data1912.forEach(function(element,index){
+game_announcement.append(data1912[index]+' is dead.');
+});
+
 var has_game_ended = $.ajax({
 url:"/has_game_ended",
 type:"POST",
@@ -108,20 +138,19 @@ data:{game:game}
 has_game_ended.done(function(data191){
 console.log(data191);
 if(data191 == 'game has ended'){
-location.href = '/review';
+location.href = '/review?game='+game;
 }else{
 console.log(data191);
 init_mafia();
 setTimeout(function(){
 location.href = '/game?game='+game;
-init_votes();
 },1200);
 
 }
 
 });
 
-
+});
 }
 });
 
@@ -153,6 +182,10 @@ get_game_messages();
 },600);
 
 */
+
+
+
+
 
 function show_lightbox(){
 console.log('done');
@@ -446,6 +479,7 @@ inform_city.done(function(data){
 
 
 function start_first_vote(){
+init_votes();
 game_announcement.append('Detective close your eyes.');
 game_announcement.append('City open your eyes.');
 
@@ -473,6 +507,7 @@ $('.right_game_chat_player_name').addClass('first_vote_active');
 $('.right_game_chat_player_name.first_vote_active').bind('click',function(){
 var vote_answer = $(this).text();
 vote_answer = vote_answer.trim();
+vote_answer = vote_answer.replace("\n","")
 
 $('.game_lightbox').html('<div class="game_lightbox_body">Are you sure you want to vote '+vote_answer+'</div><div class="game_lightbox_buttons"><button name="first_vote_yes" class="first_vote_yes">Yes</button><button name="first_vote_no" class="first_vote_no">No</button></div>');
 show_lightbox();
@@ -647,6 +682,17 @@ var game_announcement = $('.left_game_announcement');
 setTimeout(function(){
 game_announcement.append('<div class="message">Whom do you want to kill?</div>');
 },600);
+
+var has_mafia_voted = $.ajax({
+url:"/has_mafia_voted",
+type:"POST",
+data:{game:game}
+});
+
+has_mafia_voted.done(function(data121){
+
+if(data121 != 'yes'){
+
 $('.right_game_chat_player_name').addClass('ask_mafia_active');
 
 $('.right_game_chat_player_name.ask_mafia_active').bind('click',function(){
@@ -686,6 +732,10 @@ console.log('ask mafia no');
 hide_lightbox();
 });
 
+
+});
+
+}
 
 });
 
@@ -751,6 +801,55 @@ if(data101 == 'mafias init'){
 }
 
 
+function ask_dacoit(){
+
+var get_user_role = $.ajax({
+url:"/get_current_user_role",
+type:"POST",
+data:{game_name:game}
+});
+
+
+get_user_role.done(function(data141){
+
+if(data141 == 'dacoit'){
+
+$('.game_lightbox').html('<div class="game_lightbox_body">Do you want to kill someone?</div><div class="game_lightbox_buttons"><button class="dacoit_kill_yes">Yes</button><button class="dacoit_kill_no">No</button></div>');
+show_lightbox();
+
+$('.dacoit_kill_yes').bind('click',function(){
+
+$('.right_game_chat_player_name').addClass('ask_dacoit_active');
+
+$('.right_game_chat_player_name.ask_dacoit_active').bind('click',function(){
+
+var killed = $(this).text();
+killed = killed.replace("undefined","");
+
+var dacoit_kill_yes = $.ajax({
+url:"/dacoit_killed",
+type:"POST",
+data:{game:game,killed:killed}
+});
+
+dacoit_kill_yes.done(function(data191){
+game_announcement.append(data191);
+});
+
+});
+});
+
+$('.dacoit_kill_no').bind('click',function(){
+hide_lightbox();
+});
+
+}
+
+});
+
+}
+
+
 
 function start_game_cycle(){
 
@@ -805,6 +904,8 @@ if(data191 == 'mafia' || data191 == 'healer' || data191 == 'detective' || data19
 $('.right_game_chat_player_name.final_vote_active').bind('click',function(){
 console.log('final answer add called');
 var final_answer = $(this).text();
+final_answer = final_answer.trim();
+final_answer = final_answer.replace("\n","");
 final_answer = final_answer.replace("undefined","");
 
 var final_answer_add = $.ajax({
@@ -894,5 +995,8 @@ function start_explain_yourself_method(){
 game_announcement.append('Explain yourself');
 
 }
+
+
+
 
 });
