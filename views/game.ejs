@@ -57,19 +57,19 @@ City go to sleep. Mafia open your eyes.
 CHAT MESSAGES
 </div>
 
-<% if(user_role = 'mafia'){ %>
+<% if(user_role == 'mafia'){ %>
 <span class="left_game_role_container">m</span>
 <% } %>
-<% if(user_role = 'citizen'){ %>
+<% if(user_role == 'citizen'){ %>
 <span class="left_game_role_container">c</span>
 <% } %>
-<% if(user_role = 'dacoit'){ %>
+<% if(user_role == 'dacoit'){ %>
 <span class="left_game_role_container">dc</span>
 <% } %>
-<% if(user_role = 'detective'){ %>
+<% if(user_role == 'detective'){ %>
 <span class="left_game_role_container">dt</span>
 <% } %>
-<% if(user_role = 'healer'){ %>
+<% if(user_role == 'healer'){ %>
 <span class="left_game_role_container">hl</span>
 <% } %>
 <div class="left_game_chat_messages_container1">
