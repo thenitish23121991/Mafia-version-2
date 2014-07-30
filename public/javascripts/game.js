@@ -489,6 +489,10 @@ init_votes();
 game_announcement.append('Detective close your eyes.');
 game_announcement.append('City open your eyes.');
 
+$('.right_game_chat_player_name').removeClass('ask_detective_active');
+$('.right_game_chat_player_name').removeClass('ask_mafia_active');
+$('.right_game_chat_player_name').removeClass('ask_healer_active');
+
 var get_killed_players = $.ajax({
 url:"/get_killed_players",
 type:"POST",
@@ -949,6 +953,8 @@ game_announcement.append('Final Vote called');
 
 $('.right_game_chat_player_name').removeClass('first_vote_active');
 $('.right_game_chat_player_name').removeClass('ask_detective_active');
+$('.right_game_chat_player_name').removeClass('ask_mafia_active');
+$('.right_game_chat_player_name').removeClass('ask_healer_active');
 $('.right_game_chat_player_name').addClass('final_vote_active');
 
 var get_user_role = $.ajax({
@@ -1077,39 +1083,41 @@ ask_mafia();
 
 
 function start_explain_yourself_method(){
+$('#left_game_chat_messages_container').addClass('explain_yourself_message_active');
+$('#left_game_chat_textarea_input_button').removeClass('left_game_chat_textarea_input_button');
+$('#left_game_chat_textarea_input').removeClass('left_game_chat_textarea_input');
+$('#left_game_chat_textarea_input_button').removeClass('role_message_active');
+$('#left_game_chat_textarea_input').removeClass('role_message_active');
+$('#left_game_chat_textarea_input_button').addClass('explain_yourself_message_active');
+$('#left_game_chat_textarea_input').addClass('explain_yourself_message_active');
+
 clearInterval(get_game_messages_interval);
 get_explain_yourself_messages_interval = setInterval(function(){
 get_explain_yourself_messages();
 },1600);
 game_announcement.append('Explain yourself. You have 2 minutes.');
-$('.left_game_chat_messages_container').addClass('explain_yourself_active');
-$('.left_game_chat_textarea_input_button').removeClass('role_message_active');
-$('.left_game_chat_textarea_input').removeClass('role_message_active');
-$('.left_game_chat_textarea_input_button').addClass('explain_yourself_message_active');
-$('.left_game_chat_textarea_input').addClass('explain_yourself_message_active');
 
-
-$('.left_game_chat_textarea_input.explain_yourself_message_active').bind('keypress',function(e){
+$('#left_game_chat_textarea_input.explain_yourself_message_active').bind('keypress',function(e){
 if(e.keyCode == 13){
-var message = $('.left_game_chat_textarea_input').val();
+var message = $('#left_game_chat_textarea_input').val();
 message = message.trim();
 
 if(message != ''){
 
-var add_game_message = $.ajax({
-url:"/add_game_message",
+var add_explain_yourself_message = $.ajax({
+url:"/add_explain_yourself_message",
 type:"POST",
 data:{game:game,message:message}
 });
 
-add_game_message.done(function(data12){
+add_explain_yourself_message.done(function(data12){
 
 console.log(data12);
 $('.left_game_chat_messages_container').append('<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div>');
 var scroll_height = $('.left_game_chat_messages_container')[0].scrollHeight;
 console.log(scroll_height);
 $('.left_game_chat_messages_container').scrollTop(scroll_height);
-$('.left_game_chat_textarea_input').val('');
+$('#left_game_chat_textarea_input').val('');
 
 });
 }
@@ -1118,24 +1126,24 @@ $('.left_game_chat_textarea_input').val('');
 
 
 
-$('.left_game_chat_textarea_input_button.explain_yourself_message_active').bind('click',function(){
-var message = $('.left_game_chat_textarea_input').val();
+$('#left_game_chat_textarea_input_button.explain_yourself_message_active').bind('click',function(){
+var message = $('#left_game_chat_textarea_input').val();
 message = message.trim();
 
 if(message != ''){
 
-var add_game_message = $.ajax({
-url:"/add_game_message",
+var add_explain_yourself_message = $.ajax({
+url:"/add_explain_yourself_message",
 type:"POST",
 data:{game:game,message:message}
 });
 
-add_game_message.done(function(data12){
+add_explain_yourself_message.done(function(data12){
 
 console.log(data12);
 
 $('.left_game_chat_messages_container').append('<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div>');
-$('.left_game_chat_textarea_input').val('');
+$('#left_game_chat_textarea_input').val('');
 
 });
 }
