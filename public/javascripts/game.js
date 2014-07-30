@@ -522,7 +522,7 @@ data:{game:game}
 });
 
 has_user_voted_first.done(function(data181){
-
+console.log('has user voted first: '+data181);
 if(data181 != 'yes'){
 
 $('.game_lightbox').html('<div class="game_lightbox_body">Are you sure you want to vote '+vote_answer+'</div><div class="game_lightbox_buttons"><button name="first_vote_yes" class="first_vote_yes">Yes</button><button name="first_vote_no" class="first_vote_no">No</button></div>');
@@ -964,7 +964,7 @@ data:{game:game}
 });
 
 has_user_final_voted.done(function(data191){
-
+console.log('has user final voted: '+data191);
 if(data191 != 'yes'){
 
 var final_answer = $(this).text();
