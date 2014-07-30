@@ -612,6 +612,22 @@ res.send(data191);
 });
 });
 
+
+app.post('/add_explain_yourself_message',function(req,res){
+var game = req.body.game;
+game1.add_explain_yourself_message(game,function(data191){
+console.log(data191);
+res.send(data191);
+});
+});
+
+app.post('/get_explain_yourself_messages',function(data181){
+var game = req.body.game;
+game1.get_explain_yourself_messages(game,function(data181){
+
+});
+});
+
 //game1.assign_mafias('nitish123');
 
 

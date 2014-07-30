@@ -20,6 +20,7 @@ data:{nick:nick}
 }); 
 
 add_nick.done(function(data11){
+setTimeout(function(){
 console.log(data11);
 
 if(data11 == 'nick already taken'){
@@ -42,7 +43,7 @@ $('.mafia_lightbox_modal').css({
 console.log(data11);
 location.href = '/screen1';
 }
-
+},1600);
 });
 
 });
