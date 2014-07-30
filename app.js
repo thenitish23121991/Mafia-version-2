@@ -520,7 +520,27 @@ res.send(data171);
 app.post('/has_mafia_voted',function(req,res){
 var game = req.body.game;
 var player = req.session.current_user;
-game1.has_mafia_voted(game,user,function(data191){
+game1.has_mafia_voted(game,player,function(data191){
+console.log('has mafia voted: '+data191);
+res.send(data191);
+});
+});
+
+
+app.post('/has_user_first_voted',function(req,res){
+var game = req.body.game;
+var user = req.session.current_user;
+game1.has_user_first_voted(game,user,function(data181){
+console.log(data181);
+res.send(data181);
+});
+});
+
+app.post('/has_user_final_voted',function(req,res){
+var game = req.body.game; 
+var user = req.session.current_user;
+game1.has_user_final_voted(game,user,function(data191){
+console.log(data191);
 res.send(data191);
 });
 });

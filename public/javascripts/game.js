@@ -176,12 +176,11 @@ location.href = '/game?game='+game;
 });
 },2300);
 
-/*
-setInterval(function(){
-get_game_messages();
-},600);
 
-*/
+setInterval(function(){
+//get_game_messages();
+},1600);
+
 
 
 
@@ -216,7 +215,9 @@ messages_data += '<div class="left_game_chat_message_item"><span class="left_gam
 messages_data = messages_data.replace("undefined","");
 
 $('.left_game_chat_messages_container').html(messages_data);
-
+var scroll_height = $('.left_game_chat_messages_container').scrollHeight();
+console.log(scroll_height);
+$('.left_game_chat_messages_container').scrollTop(scroll_height);
 });
 
 }
@@ -507,7 +508,17 @@ $('.right_game_chat_player_name').addClass('first_vote_active');
 $('.right_game_chat_player_name.first_vote_active').bind('click',function(){
 var vote_answer = $(this).text();
 vote_answer = vote_answer.trim();
-vote_answer = vote_answer.replace("\n","")
+vote_answer = vote_answer.replace("\n","");
+
+var has_user_first_voted = $.ajax({
+url:"/has_user_first_voted",
+type:"POST",
+data:{game:game}
+});
+
+has_user_voted_first.done(function(data181){
+
+if(data181 != 'yes'){
 
 $('.game_lightbox').html('<div class="game_lightbox_body">Are you sure you want to vote '+vote_answer+'</div><div class="game_lightbox_buttons"><button name="first_vote_yes" class="first_vote_yes">Yes</button><button name="first_vote_no" class="first_vote_no">No</button></div>');
 show_lightbox();
@@ -532,9 +543,13 @@ $('.first_vote_no').bind('click',function(){
 hide_lightbox();
 });
 
+}
+
 });
 
 dacoit_is_active();
+
+});
 
 });
 
@@ -558,6 +573,27 @@ get_current_user_role.done(function(data12111){
 
 if(data12111 == 'dacoit'){
 
+
+$('.game_lightbox').html('<div class="game_lightbox_body">Do you want to kill anyone?</div><div class="game_lightbox_buttons"><button class="dacoit_active_yes">Yes</button><button class="dacoit_active_no">No</button></div>');
+$('.right_game_chat_player_name').addClass('ask_dacoit_active');
+show_lightbox();
+
+$('.right_game_chat_player_name.ask_dacoit_active').bind('click',function(){
+
+var dacoit_answer = $(this).text();
+dacoit_answer = dacoit_answer.trim();
+
+$('.dacoit_active_yes').bind('click',function(){
+hide_lightbox();
+});
+
+
+$('.dacoit_active_no').bind('click',function(){
+hide_lightbox();
+});
+
+$('.dacoit_ask_kill_yes').bind('click',function(){
+
 var dacoit_kill_person = $.ajax({
 url:"/dacoit_kill_person",
 type:"POST",
@@ -566,8 +602,16 @@ data:{game:game,answer:dacoit_answer}
 
 dacoit_kill_person.done(function(data1211){
 if(data1211 == 'person killed'){
-
+hide_lightbox();
 }
+});
+
+});
+
+$('.dacoit_ask_kill_no').bind('click',function(){
+hide_lightbox();
+});
+
 });
 
 }
@@ -691,21 +735,25 @@ data:{game:game}
 
 has_mafia_voted.done(function(data121){
 
-if(data121 != 'yes'){
 
 $('.right_game_chat_player_name').addClass('ask_mafia_active');
 
 $('.right_game_chat_player_name.ask_mafia_active').bind('click',function(){
 var answer = $(this).text();
 answer = answer.trim();
+if(data121 != 'yes'){
 $('.game_lightbox').html('<div class="game_lightbox_body">Are you sure you want to kill '+answer+'? </div><div class="game_lightbox_buttons"><button name="ask_mafia_yes" class="ask_mafia_yes">Yes</button><button name="ask_mafia_no" class="ask_mafia_no">No</button></div>');
 show_lightbox();
+
+console.log(data121);
+
 
 $('button.ask_mafia_yes').bind('click',function(){
 console.log('ask mafia yes');
 var game = $('.left_game_title_container').text();
 game = game.trim();
 console.log(answer);
+
 
 var add_mafia_answer = $.ajax({
 url:"/add_mafia_answer",
@@ -732,10 +780,10 @@ console.log('ask mafia no');
 hide_lightbox();
 });
 
+}
 
 });
 
-}
 
 });
 
@@ -903,6 +951,17 @@ console.log(data191);
 if(data191 == 'mafia' || data191 == 'healer' || data191 == 'detective' || data191 == 'dacoit' || data191 == 'citizen'){
 $('.right_game_chat_player_name.final_vote_active').bind('click',function(){
 console.log('final answer add called');
+
+var has_user_final_voted = $.ajax({
+url:"/has_user_final_voted",
+type:"POST",
+data:{game:game}
+});
+
+has_user_final_voted.done(function(data191){
+
+if(data191 != 'yes'){
+
 var final_answer = $(this).text();
 final_answer = final_answer.trim();
 final_answer = final_answer.replace("\n","");
@@ -921,6 +980,9 @@ if(data161 == 'final vote done'){
 }
 });
 
+}
+
+});
 });
 }
 });
@@ -942,6 +1004,8 @@ add_game_message.done(function(data12){
 console.log(data12);
 
 $('.left_game_chat_messages_container').append('<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div>');
+var scroll_height = $('.left_game_chat_messages_container').scrollHeight();
+$('.left_game_chat_messages_container').scrollTop(scroll_height);
 $('.left_game_chat_textarea_input').val('');
 
 });
