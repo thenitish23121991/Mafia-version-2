@@ -220,7 +220,7 @@ messages_data += '<div class="left_game_chat_message_item"><span class="left_gam
 messages_data = messages_data.replace("undefined","");
 
 $('.left_game_chat_messages_container').html(messages_data);
-var scroll_height = $('.left_game_chat_messages_container').scrollHeight();
+var scroll_height = $('.left_game_chat_messages_container')[0].scrollHeight();
 console.log(scroll_height);
 $('.left_game_chat_messages_container').scrollTop(scroll_height);
 });
@@ -515,7 +515,7 @@ var vote_answer = $(this).text();
 vote_answer = vote_answer.trim();
 vote_answer = vote_answer.replace("\n","");
 
-var has_user_first_voted = $.ajax({
+var has_user_voted_first = $.ajax({
 url:"/has_user_first_voted",
 type:"POST",
 data:{game:game}
