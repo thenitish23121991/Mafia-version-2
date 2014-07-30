@@ -583,11 +583,6 @@ $('.game_lightbox').html('<div class="game_lightbox_body">Do you want to kill an
 $('.right_game_chat_player_name').addClass('ask_dacoit_active');
 show_lightbox();
 
-$('.right_game_chat_player_name.ask_dacoit_active').bind('click',function(){
-
-var dacoit_answer = $(this).text();
-dacoit_answer = dacoit_answer.trim();
-
 $('.dacoit_active_yes').bind('click',function(){
 hide_lightbox();
 });
@@ -595,26 +590,37 @@ hide_lightbox();
 
 $('.dacoit_active_no').bind('click',function(){
 hide_lightbox();
+$('.right_game_chat_player_name').removeClass('ask_dacoit_active');
 });
+
+$('.right_game_chat_player_name.ask_dacoit_active').bind('click',function(){
+
+var dacoit_answer = $(this).text();
+dacoit_answer = dacoit_answer.trim();
+
+$('.game_lightbox').html('<div class="game_lightbox_body">Are you sure you want to kill '+dacoit_answer+'</div><div class="game_lightbox_buttons"><button class="dacoit_ask_kill_yes">Yes</button><button class="dacoit_ask_kill_no">No</button></div>');
 
 $('.dacoit_ask_kill_yes').bind('click',function(){
 
 var dacoit_kill_person = $.ajax({
-url:"/dacoit_kill_person",
+url:"/dacoit_killed",
 type:"POST",
-data:{game:game,answer:dacoit_answer}
+data:{game:game,killed:dacoit_answer}
 });
 
 dacoit_kill_person.done(function(data1211){
-if(data1211 == 'person killed'){
 hide_lightbox();
-}
+
+$('.right_game_chat_player_name').removeClass('ask_dacoit_active');
+
 });
 
 });
 
 $('.dacoit_ask_kill_no').bind('click',function(){
 hide_lightbox();
+$('.right_game_chat_player_name').removeClass('ask_dacoit_active');
+
 });
 
 });
@@ -886,7 +892,7 @@ data:{game:game,killed:killed}
 });
 
 dacoit_kill_yes.done(function(data191){
-game_announcement.append(data191);
+update_dacoit_action(data191);
 });
 
 });
@@ -1158,6 +1164,25 @@ messages_data += '<div class="left_game_chat_message_item"><span class="left_gam
 messages_data = messages_data.replace("undefined","");
 $('.left_game_chat_messages_container').html(messages_data);
 }
+});
+
+}
+
+
+function update_dacoit_action(killed){
+
+var get_user_role = $.ajax({
+url:"/get_current_user_role",
+type:"POST",
+data:{game_name:game}
+});
+
+get_user_role.done(function(data191){
+
+if(data191 == 'mafia' || data191 == 'citizen' || data191 == 'healer' || data191 == 'dacoit' || deta191 == 'detective'){
+game_announcement.append(killed);
+}
+
 });
 
 }

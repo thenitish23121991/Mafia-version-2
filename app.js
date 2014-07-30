@@ -537,15 +537,6 @@ res.send(data191);
 });
 
 
-app.post('/has_user_first_voted',function(req,res){
-var game = req.body.game;
-var user = req.session.current_user;
-game1.has_user_first_voted(game,user,function(data181){
-console.log(data181);
-res.send(data181);
-});
-});
-
 app.post('/has_user_final_voted',function(req,res){
 var game = req.body.game; 
 var user = req.session.current_user;
@@ -556,10 +547,11 @@ res.send(data191);
 });
 
 
-app.post('/has_user_voted_first',function(req,res){
+app.post('/has_user_first_voted',function(req,res){
 var game = req.body.game;
 var player = req.session.current_user;
 game1.has_user_voted_first(game,player,function(data191){
+console.log('has user first voted app: '+data191);
 res.send(data191);
 });
 });
@@ -599,7 +591,7 @@ var game = req.body.game;
 var killed = req.body.killed;
 var player = req.session.current_user;
 game1.dacoit_killed(game,player,killed,function(data181){
-
+res.send(data181);
 });
 });
 
