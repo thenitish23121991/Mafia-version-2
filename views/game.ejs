@@ -56,7 +56,7 @@ City go to sleep. Mafia open your eyes.
 <div class="left_game_chat_messages_title">
 CHAT MESSAGES
 </div>
-
+<%= user_role %>
 <% if(user_role == 'mafia'){ %>
 <span class="left_game_role_container">m</span>
 <% } %>
@@ -72,7 +72,7 @@ CHAT MESSAGES
 <% if(user_role == 'healer'){ %>
 <span class="left_game_role_container">hl</span>
 <% } %>
-<%= user_role %>
+
 <div class="left_game_chat_messages_container1">
 
 <div class="left_game_chat_messages_container">
