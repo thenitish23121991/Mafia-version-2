@@ -609,6 +609,7 @@ font-size:18px;
 .left_game_chat_action_message{
 font-size:18px;
 font-family:'LatoLight';
-color:rgba(255,255,255,.43);
+padding:18px 0px;
+color:rgba(255,255,255,.73);
 
 }
