@@ -1098,6 +1098,7 @@ add_game_message.done(function(data12){
 console.log(data12);
 $('.left_game_chat_messages_container').append('<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div>');
 var scroll_height = $('.left_game_chat_messages_container').scrollHeight();
+console.log(scroll_height);
 $('.left_game_chat_messages_container').scrollTop(scroll_height);
 $('.left_game_chat_textarea_input').val('');
 
