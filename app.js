@@ -130,8 +130,12 @@ app.get('/game',function(req,res){
 var game_name = req.query.game;
 game1.get_game_info(game_name,function(data){
 var game_users = data[0].users;
+var current_user = req.session.current_user;
+game1.get_current_role(game_name,current_user,function(data191){
 console.log(data);
-res.render('game',{game_name:game_name,game_users:game_users});
+var role = data191;
+res.render('game',{game_name:game_name,game_users:game_users,user_role:role});
+});
 });
 });
 
