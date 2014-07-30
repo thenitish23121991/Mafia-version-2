@@ -601,6 +601,6 @@ opacity:0;
 -o-transition:all .2s ease;
 -ms-transition:all .2s ease;
 }
-.invite_fb_friends_button{
+.invite_fb_friends_button, .middle_start_new_game_button_screen2{
 background:#3b5998;
 }
