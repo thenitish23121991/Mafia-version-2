@@ -156,7 +156,7 @@ location.href = '/game?game='+game;
 
 },2300);
 
-},12000);
+},120000);
 }
 
 });
@@ -1063,7 +1063,7 @@ ask_mafia();
 
 
 function start_explain_yourself_method(){
-game_announcement.append('Explain yourself');
+game_announcement.append('Explain yourself. You have 2 minutes.');
 
 }
 
