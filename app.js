@@ -624,7 +624,8 @@ res.send(data191);
 app.post('/get_explain_yourself_messages',function(data181){
 var game = req.body.game;
 game1.get_explain_yourself_messages(game,function(data181){
-
+console.log(data181);
+res.send(data181);
 });
 });
 

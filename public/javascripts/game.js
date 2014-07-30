@@ -1143,12 +1143,13 @@ $('.left_game_chat_textarea_input').val('');
 function get_explain_yourself_messages(){
 
 var explain_yourself_messages = $.ajax({
-url:"/explain_yourself_messages",
+url:"/get_explain_yourself_messages",
 type:"POST",
 data:{game:game}
 });
 
 explain_yourself_messages.done(function(data181){
+console.log(data181);
 var messages_data = '';
 if(data181.length != 0){
 data181.forEach(function(element,index){
