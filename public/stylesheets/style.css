@@ -418,7 +418,6 @@ color:#fff;
 padding:13px 0px;
 padding-top:18px;
 height:130px;
-width:280px;
 text-align:center;
 
 overflow:scroll;
@@ -603,4 +602,13 @@ opacity:0;
 }
 .invite_fb_friends_button, .middle_start_new_game_button_screen2{
 background:#3b5998;
+}
+.left_game_role_container{
+font-size:18px;
+}
+.left_game_chat_action_message{
+font-size:18px;
+font-family:'LatoLight';
+color:rgba(255,255,255,.43);
+
 }
