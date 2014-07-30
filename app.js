@@ -133,8 +133,8 @@ var game_users = data[0].users;
 var current_user = req.session.current_user;
 game1.get_current_role(game_name,current_user,function(data191){
 console.log(data);
-var role = data191;
-res.render('game',{game_name:game_name,game_users:game_users,user_role:role});
+var user_role = data191;
+res.render('game',{game_name:game_name,game_users:game_users,user_role:user_role});
 });
 });
 });
