@@ -19,9 +19,29 @@ type:"POST",
 data:{nick:nick}
 }); 
 
-add_nick.done(function(data){
+add_nick.done(function(data11){
+console.log(data11);
 
+if(data11 == 'nick already taken'){
+$('.mafia_lightbox_modal').html('This nickname is taken. Please choose some other nickname.<div><button class="hide_mafia_lightbox_button">Ok</button></div>');
+$('.mafia_lightbox_modal').css({
+'z-index' : '10001',
+'opacity' : '1',
+'pointer-events' : 'auto'
+});
+
+$('.hide_mafia_lightbox_button').bind('click',function(){
+console.log('hide lightbox called');
+$('.mafia_lightbox_modal').css({
+'z-index' : '-6',
+'opacity' : '0',
+'pointer-events' : 'none'
+});
+});
+}else{
+console.log(data11);
 location.href = '/screen1';
+}
 
 });
 

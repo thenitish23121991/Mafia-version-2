@@ -992,6 +992,9 @@ if(data161 == 'final vote done'){
 $('.left_game_chat_textarea_input').bind('keypress',function(e){
 if(e.keyCode == 13){
 var message = $('.left_game_chat_textarea_input').val();
+message = message.trim();
+
+if(message != ''){
 
 var add_game_message = $.ajax({
 url:"/add_game_message",
@@ -1010,12 +1013,16 @@ $('.left_game_chat_textarea_input').val('');
 
 });
 }
+}
 });
 
 
 
 $('.left_game_chat_textarea_input_button').bind('click',function(){
 var message = $('.left_game_chat_textarea_input').val();
+message = message.trim();
+
+if(message != ''){
 
 var add_game_message = $.ajax({
 url:"/add_game_message",
@@ -1031,7 +1038,7 @@ $('.left_game_chat_messages_container').append('<div class="left_game_chat_messa
 $('.left_game_chat_textarea_input').val('');
 
 });
-
+}
 
 });
 

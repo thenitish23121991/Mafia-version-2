@@ -150,8 +150,13 @@ app.post('/add_nick',function(req,res){
 var nick = req.body.nick;
 console.log('nick : '+nick);
 game1.add_nick(nick,function(docs){
+if(docs != 'nick already taken'){
+console.log(docs);
 req.session.current_user = docs.name;
 res.send('nick added');
+}else{
+res.send('nick already taken');
+}
 });
 });
 
