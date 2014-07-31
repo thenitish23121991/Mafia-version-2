@@ -304,10 +304,10 @@ color:#fff;
 padding:13px 0px;
 height:92px;
 }
-.left_game_chat_textarea, .left_game_chat_textarea_input, .left_game_chat_messages_container{
+.left_game_chat_textarea, .left_game_chat_textarea_input, #left_game_chat_textarea_input, .left_game_chat_messages_container{
 width:340px;
 }
-.left_game_chat_textarea_input{
+.left_game_chat_textarea_input, #left_game_chat_textarea_input{
 margin-left:0%;
 }
 .left_game_quit_game_button{
@@ -379,7 +379,7 @@ clear:both;
 .left_game_left_content_container{
 display:block;
 }
-.left_game_chat_textarea_input{
+.left_game_chat_textarea_input, #left_game_chat_textarea_input{
 background:#fff;
 color:#333;
 }
@@ -434,6 +434,19 @@ text-align:center;
 padding:13px 0px;
 }
 .left_game_chat_textarea_input_button{
+position:absolute;
+top:0px;
+height:45px;
+right:-54px;
+background:#3c948b;
+color:#fff;
+width:80px;
+border:none;
+cursor:pointer;
+font-family:'BGLight';
+font-size:14px;
+}
+#left_game_chat_textarea_input_button{
 position:absolute;
 top:0px;
 height:45px;

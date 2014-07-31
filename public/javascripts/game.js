@@ -749,14 +749,14 @@ data:{game:game}
 });
 
 has_mafia_voted.done(function(data121){
-
-
+console.log('has mafia voted: '+data121);
+if(data121 != 'yes'){
 $('.right_game_chat_player_name').addClass('ask_mafia_active');
 
 $('.right_game_chat_player_name.ask_mafia_active').bind('click',function(){
 var answer = $(this).text();
 answer = answer.trim();
-if(data121 != 'yes'){
+
 $('.game_lightbox').html('<div class="game_lightbox_body">Are you sure you want to kill '+answer+'? </div><div class="game_lightbox_buttons"><button name="ask_mafia_yes" class="ask_mafia_yes">Yes</button><button name="ask_mafia_no" class="ask_mafia_no">No</button></div>');
 show_lightbox();
 
@@ -795,9 +795,8 @@ console.log('ask mafia no');
 hide_lightbox();
 });
 
-}
-
 });
+}
 
 
 });
@@ -1099,6 +1098,7 @@ game_announcement.append('Explain yourself. You have 2 minutes.');
 
 $('#left_game_chat_textarea_input.explain_yourself_message_active').bind('keypress',function(e){
 if(e.keyCode == 13){
+console.log('explain yourself message called');
 var message = $('#left_game_chat_textarea_input').val();
 message = message.trim();
 
@@ -1127,6 +1127,7 @@ $('#left_game_chat_textarea_input').val('');
 
 
 $('#left_game_chat_textarea_input_button.explain_yourself_message_active').bind('click',function(){
+console.log('explain yourself message called');
 var message = $('#left_game_chat_textarea_input').val();
 message = message.trim();
 

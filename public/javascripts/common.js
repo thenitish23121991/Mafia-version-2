@@ -20,7 +20,7 @@ data:{nick:nick}
 }); 
 
 add_nick.done(function(data11){
-setTimeout(function(){
+
 console.log(data11);
 
 if(data11 == 'nick already taken'){
@@ -43,7 +43,6 @@ $('.mafia_lightbox_modal').css({
 console.log(data11);
 location.href = '/screen1';
 }
-},1600);
 });
 
 });
@@ -61,7 +60,9 @@ add_game.done(function(data){
 
 var game1 = data.name;
 if(game1 != ''){
+setTimeout(function(){
 location.href = '/screen2?game='+game1;
+},900);
 }
 
 });
