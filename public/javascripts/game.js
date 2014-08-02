@@ -105,6 +105,10 @@ data141.forEach(function(element,index){
 game_announcement.append('<div class="message">'+data141[index]+' is dead.</div>');
 });
 
+
+var announce_scroll = $('.left_game_announcement')[0].scrollHeight;
+$('.left_game_announcement').scrollTop(announce_scroll);
+
 });
 
 start_explain_yourself_method();
@@ -135,6 +139,10 @@ console.log(data1912);
 data1912.forEach(function(element,index){
 game_announcement.append('<div class="message">'+data1912[index]+' is dead.</div>');
 });
+
+
+var announce_scroll = $('.left_game_announcement')[0].scrollHeight;
+$('.left_game_announcement').scrollTop(announce_scroll);
 
 var has_game_ended = $.ajax({
 url:"/has_game_ended",
@@ -273,7 +281,11 @@ var has_killed = "false";
 setTimeout(function(){
 game_announcement.append('<div class="message">Mafia close your eyes</div>');
 game_announcement.append('<div class="message">Healer open your eyes</div>');
+
+var announce_scroll = $('.left_game_announcement')[0].scrollHeight;
+$('.left_game_announcement').scrollTop(announce_scroll);
 },600);
+
 
 var game = $('.left_game_title_container').text();
 game = game.trim();
@@ -498,6 +510,10 @@ init_votes();
 game_announcement.append('<div class="message">Detective close your eyes.</div>');
 game_announcement.append('<div class="message">City open your eyes.</div>');
 
+
+var announce_scroll = $('.left_game_announcement')[0].scrollHeight;
+$('.left_game_announcement').scrollTop(announce_scroll);
+
 $('.right_game_chat_player_name').removeClass('ask_detective_active');
 $('.right_game_chat_player_name').removeClass('ask_mafia_active');
 $('.right_game_chat_player_name').removeClass('ask_healer_active');
@@ -520,6 +536,10 @@ killed_text += '<div class="message">'+data121[index]+' is dead.</div>';
 killed_text = killed_text.replace("undefined","");
 game_announcement.append(killed_text);
 game_announcement.append('<div class="message">First Vote Called</div>');
+
+
+var announce_scroll = $('.left_game_announcement')[0].scrollHeight;
+$('.left_game_announcement').scrollTop(announce_scroll);
 
 $('.right_game_chat_player_name').addClass('first_vote_active');
 
@@ -662,6 +682,10 @@ function ask_detective(){
 setTimeout(function(){
 game_announcement.append('<div class="message">Healer close your eyes</div>');
 game_announcement.append('<div class="message">Detective open your eyes</div>');
+
+
+var announce_scroll = $('.left_game_announcement')[0].scrollHeight;
+$('.left_game_announcement').scrollTop(announce_scroll);
 },600);
 
 var game = $('.left_game_title_container').text();
@@ -1006,6 +1030,10 @@ console.log('refresh the window to restart the game');
 function start_final_vote(){
 game_announcement.append('<div class="message">Final Vote called</div>');
 
+
+var announce_scroll = $('.left_game_announcement')[0].scrollHeight;
+$('.left_game_announcement').scrollTop(announce_scroll);
+
 $('.right_game_chat_player_name').removeClass('first_vote_active');
 $('.right_game_chat_player_name').removeClass('ask_detective_active');
 $('.right_game_chat_player_name').removeClass('ask_mafia_active');
@@ -1041,6 +1069,7 @@ var final_answer = $(this).text();
 final_answer = final_answer.trim();
 final_answer = final_answer.replace("\n","");
 final_answer = final_answer.replace("undefined","");
+
 
 $('.game_lightbox').html('<div class="game_lightbox_body">Are you sure you want to vote '+final_answer+'</div><div class="game_lightbox_buttons"><button class="final_vote_yes">Yes</button><button class="final_vote_no">No</button></div>');
 $('.game_lightbox_title').html('Are you sure?');
@@ -1174,6 +1203,9 @@ get_explain_yourself_messages();
 },1600);
 game_announcement.append('<div class="message">Explain yourself. You have 2 minutes.</div>');
 
+var announce_scroll = $('.left_game_announcement')[0].scrollHeight;
+$('.left_game_announcement').scrollTop(announce_scroll);
+
 $('#left_game_chat_textarea_input.explain_yourself_message_active').bind('keypress',function(e){
 if(e.keyCode == 13){
 console.log('explain yourself message called');
@@ -1273,6 +1305,9 @@ get_user_role.done(function(data191){
 
 if(data191 == 'mafia' || data191 == 'citizen' || data191 == 'healer' || data191 == 'dacoit' || deta191 == 'detective'){
 game_announcement.append('<div class="message">Dacoit has killed '+killed+'</div>');
+
+var announce_scroll = $('.left_game_announcement')[0].scrollHeight;
+$('.left_game_announcement').scrollTop(announce_scroll);
 }
 
 });
