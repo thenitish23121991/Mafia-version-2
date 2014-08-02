@@ -19,6 +19,22 @@ is_game_ready.done(function(data){
 if(data != 'game not ready'){
 location.href = '/game?game='+data;
 
+}else{
+$('.mafia_lightbox_modal').html('The game needs atleast 9 players.<div><button class="hide_mafia_lightbox_button">Ok</button></div>');
+$('.mafia_lightbox_modal').css({
+'z-index' : '10001',
+'opacity' : '1',
+'pointer-events' : 'auto'
+});
+
+$('.hide_mafia_lightbox_button').bind('click',function(){
+console.log('hide lightbox called');
+$('.mafia_lightbox_modal').css({
+'z-index' : '-6',
+'opacity' : '0',
+'pointer-events' : 'none'
+});
+});
 }
 
 });

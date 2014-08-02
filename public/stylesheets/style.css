@@ -34,6 +34,9 @@ font-family:'MuseoSansBold';
 src:url('fontello.ttf');
 font-family:'fontello';
 }
+html,body{
+overflow-x:hidden;
+}
 .container{
 min-height:100%;
 width:100%;
@@ -232,6 +235,7 @@ font-family:'BGMedium';
 width:84%;
 float:left;
 overflow:hidden;
+min-height:200px;
 }
 .right_game_container{
 width:210px;
@@ -302,10 +306,10 @@ color:#fff;
 }
 .left_game_announcement_container{
 padding:13px 0px;
-height:92px;
+height:162px;
 }
 .left_game_chat_textarea, .left_game_chat_textarea_input, #left_game_chat_textarea_input, .left_game_chat_messages_container{
-width:340px;
+width:640px;
 }
 .left_game_chat_textarea_input, #left_game_chat_textarea_input{
 margin-left:0%;
@@ -313,7 +317,16 @@ margin-left:0%;
 .left_game_quit_game_button{
 background:#3b5998;
 margin:23px 0px;
-margin-right:53px;
+
+width:140px;
+}
+.left_game_quit_game_button span{
+width:140px;
+text-align:center;
+}
+.left_game_quit_game_button:before{
+width:140px;
+text-align:center;
 }
 .left_game_chat_messages_container{
 padding:14px 27px;
@@ -365,13 +378,15 @@ overflow:scroll;
 }
 .left_game_left_container{
 float:left;
-width:42%;
+width:24%;
 height:100%;
+min-height:100px;
 }
 .left_game_right_container{
 float:left;
-width:40%;
+width:62%;
 height:100%;
+min-height:100px;
 }
 .left_game_left_clear{
 clear:both;
@@ -411,7 +426,7 @@ border-bottom:2px solid rgba(0,0,0,.08);
 width:100%;
 background:#fff;
 }
-.left_game_announcement{
+.left_game_announcement_container1{
 font-size:20px;
 font-family:'LatoLight';
 color:#fff;
@@ -419,11 +434,20 @@ padding:13px 0px;
 padding-top:18px;
 height:130px;
 text-align:center;
-
-overflow:scroll;
+background:#fff;
+overflow:hidden;
+color:#333;
+width:640px;
+margin-left:274px;
+padding:14px 27px;
+}
+.left_game_announcement{
+overflow:auto;
+height:100%;
+width:100%;
 }
 .left_game_chat_container{
-margin-top:42px;
+margin-top:102px;
 }
 .left_game_chat_messages_title{
 color:rgba(0,0,0,.39);
@@ -540,18 +564,37 @@ padding-top:23px;
 background:#00b488;
 text-align:center;
 }
-.game_lightbox{
+.game_lightbox_outer{
+position:fixed;
+background:rgba(0,0,0,.13);
+opacity:0;
+pointer-events:none;
+z-index:-5;
+height:100%;
+width:100%;
+top:0px;
+left:0px;
+
+-webkit-transition:all .2s ease;
+-moz-transition:all .2s ease;
+-ms-transition:all .2s ease;
+-o-transition:all .2s ease;
+}
+.game_lightbox_outer.visible{
+opacity:1;
+pointer-events:auto;
+z-index:10001;
+}
+.game_lightbox_container{
 position:fixed;
 top:36%;
 left:34%;
-height:24%;
 width:28%;
-padding:2%;
 text-align:center;
 opacity:0;
 pointer-events:none;
 z-index:-5;
-background:#3c948b;
+background:#1abc9c;
 font-family:'LatoLight';
 font-size:19px;
 color:#fff;
@@ -566,7 +609,20 @@ color:#fff;
 -ms-transform:rotateY(180deg);
 -o-transform:rotateY(180deg);
 }
-.game_lightbox.visible{
+.game_lightbox_title{
+font-family:'LatoLight';
+font-size:19px;
+height:50px;
+line-height:50px;
+text-align:center;
+background:rgba(0,0,0,.1);
+color:rgba(255,255,255,.45);
+width:100%;
+}
+.game_lightbox{
+padding:2%;
+}
+.game_lightbox_container.visible{
 opacity:1;
 pointer-events:auto;
 z-index:100001;
@@ -575,17 +631,44 @@ z-index:100001;
 -ms-transform:rotateY(0deg);
 -o-transform:rotateY(0deg);
 }
+
 .game_lightbox_body{
 width:100%;
-height:80%;
+height:80px;
+padding:15px 0px;
+overflow:hidden;
+padding-bottom:23px;
 }
 .game_lightbox_buttons{
 width:100%;
-height:20%;
+height:50px;
+position:absolute;
+bottom:0px;
+left:0px;
+}
+.game_lightbox_buttons button{
+width:50%;
+padding:9px;
+font-family:'LatoLight';
+font-size:16px;
+color:#fff;
+background:rgba(0,0,0,.13);
+border:none;
+border-right:1px solid rgba(0,0,0,.13);
+cursor:pointer;
 }
 .ask_mafia_yes{
 width:50%;
 height:100%;
+}
+.game_chat_messages_top{
+background:#3b5998;
+height:20px;
+width:100%;
+overflow:hidden;
+border-radius:2px;
+width:340px;
+padding:0px 27px;
 }
 .ask_mafia_no{
 width:50%;
@@ -624,5 +707,17 @@ font-size:18px;
 font-family:'LatoLight';
 padding:18px 0px;
 color:rgba(255,255,255,.73);
-
+text-align:center;
+width:100%;
+}
+.left_game_announcement_container{
+margin-top:9px;
+}
+.left_game_announcement_title{
+width:100%;
+text-align:center;
+margin-bottom:14px;
+}
+.left_game_quit_game_container{
+margin-top:59px;
 }

@@ -537,6 +537,32 @@ res.send(data191);
 });
 
 
+app.post('/has_dacoit_voted',function(req,res){
+var game = req.body.game;
+game1.has_dacoit_voted(game,function(data191){
+res.send(data191);
+});
+});
+
+
+app.post('/is_game_present',function(req,res){
+var game = req.body.game;
+console.log(game);
+game1.is_game_present(game,function(data181){
+console.log(data181);
+res.send(data181);
+});
+});
+
+
+app.post('/init_detective',function(req,res){
+var game = req.body.game;
+game1.init_detective(game,function(data181){
+res.send(data181);
+});
+});
+
+
 app.post('/has_user_final_voted',function(req,res){
 var game = req.body.game; 
 var user = req.session.current_user;
@@ -607,17 +633,19 @@ res.send(data191);
 
 app.post('/add_explain_yourself_message',function(req,res){
 var game = req.body.game;
-game1.add_explain_yourself_message(game,function(data191){
+var message = req.body.message;
+var player = req.session.current_user;
+game1.add_explain_yourself_message(game,player,message,function(data191){
 console.log(data191);
 res.send(data191);
 });
 });
 
-app.post('/get_explain_yourself_messages',function(data181){
+app.post('/get_explain_yourself_messages',function(req,res){
 var game = req.body.game;
-game1.get_explain_yourself_messages(game,function(data181){
-console.log(data181);
-res.send(data181);
+game1.get_explain_yourself_messages(game,function(data191){
+console.log(data191);
+res.send(data191);
 });
 });
 
