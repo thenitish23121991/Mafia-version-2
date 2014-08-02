@@ -976,7 +976,6 @@ data:{game:game,killed:killed}
 });
 
 has_dacoit_killed_anyone = 'yes';
-update_dacoit_action('Dacoit has killed '+killed);
 
 dacoit_kill_yes.done(function(data191){
 console.log(data191);
@@ -995,7 +994,11 @@ $('.right_game_chat_player_name').addClass('first_vote_active');
 
 }
 
+update_dacoit_action();
+
 });
+
+
 
 }
 
@@ -1313,10 +1316,21 @@ data:{game_name:game}
 get_user_role.done(function(data191){
 
 if(data191 == 'mafia' || data191 == 'citizen' || data191 == 'healer' || data191 == 'dacoit' || deta191 == 'detective'){
-game_announcement.append('<div class="message">'+killed+'</div>');
+
+var has_dacoit_killed1 = $.ajax({
+url:"/has_dacoit_killed_anyone",
+type:"POST",
+data:{game:game}
+});
+
+has_dacoit_killed1.done(function(data1911){
+
+game_announcement.append('<div class="message">'+data1911+'</div>');
 
 var announce_scroll = $('.left_game_announcement')[0].scrollHeight;
 $('.left_game_announcement').scrollTop(announce_scroll);
+
+});
 }
 
 });

@@ -649,6 +649,15 @@ res.send(data191);
 });
 });
 
+
+app.post('/has_dacoit_killed_anyone',function(req,res){
+var game = req.body.game;
+game1.has_dacoit_killed_anyone(game,function(data191){
+console.log(data191);
+res.send(data191);
+});
+});
+
 //game1.assign_mafias('nitish123');
 
 
