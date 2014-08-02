@@ -609,13 +609,15 @@ $('.right_game_chat_player_name').removeClass('ask_dacoit_active');
 has_dacoit_been_asked = 'true';
 });
 
-$('.right_game_chat_player_name.ask_dacoit_active').bind('click',function(){
+$('.ask_dacoit_active').bind('click',function(){
 
 var dacoit_answer = $(this).text();
 dacoit_answer = dacoit_answer.trim();
 
 $('.game_lightbox_title').html('Are you sure?');
 $('.game_lightbox').html('<div class="game_lightbox_body">Are you sure you want to kill '+dacoit_answer+'</div><div class="game_lightbox_buttons"><button class="dacoit_ask_kill_yes">Yes</button><button class="dacoit_ask_kill_no">No</button></div>');
+
+show_lightbox();
 
 $('.dacoit_ask_kill_yes').bind('click',function(){
 
@@ -630,6 +632,7 @@ data:{game:game,killed:dacoit_answer}
 
 dacoit_kill_person.done(function(data1211){
 hide_lightbox();
+update_dacoit_action(data1211);
 
 //$('.ask_dacoit_active').unbind('click');
 
@@ -639,7 +642,7 @@ hide_lightbox();
 
 $('.dacoit_ask_kill_no').bind('click',function(){
 hide_lightbox();
-$('.right_game_chat_player_name').removeClass('ask_dacoit_active');
+//$('.right_game_chat_player_name').removeClass('ask_dacoit_active');
 
 });
 
@@ -1032,6 +1035,8 @@ has_user_final_voted.done(function(data191){
 console.log('has user final voted: '+data191);
 if(data191 != 'yes'){
 
+$('.final_vote_active').bind('click',function(){
+
 var final_answer = $(this).text();
 final_answer = final_answer.trim();
 final_answer = final_answer.replace("\n","");
@@ -1061,6 +1066,8 @@ if(data161 == 'final vote done'){
 
 $('.final_vote_no').bind('click',function(){
 hide_lightbox();
+});
+
 });
 
 }
@@ -1254,6 +1261,7 @@ $('.left_game_chat_messages_container').html(messages_data);
 
 
 function update_dacoit_action(killed){
+console.log('update dacoit action');
 
 var get_user_role = $.ajax({
 url:"/get_current_user_role",
