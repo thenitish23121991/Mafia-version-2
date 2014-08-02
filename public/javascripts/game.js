@@ -14,6 +14,7 @@ var get_game_messages_interval;
 var explain_yourself_messages_interval;
 var game_lightbox_title;
 var has_dacoit_been_asked;
+var has_dacoit_killed_anyone;
 
 var game_announcement = $('.left_game_announcement');
 var game = $('.left_game_title_container').text();
@@ -613,6 +614,8 @@ if(data12111 == 'dacoit'){
 
 if(has_dacoit_been_asked == 'true'){
 
+$('.right_game_chat_player_name').removeClass('first_vote_active');
+
 $('.game_lightbox_title').html('God:');
 $('.game_lightbox').html('<div class="game_lightbox_body">Do you want to kill anyone?</div><div class="game_lightbox_buttons"><button class="dacoit_active_yes">Yes</button><button class="dacoit_active_no">No</button></div>');
 $('.right_game_chat_player_name').addClass('ask_dacoit_active');
@@ -620,12 +623,14 @@ show_lightbox();
 
 $('.dacoit_active_yes').bind('click',function(){
 hide_lightbox();
+$('.right_game_chat_player_name').removeClass('first_vote_active');
 });
 
 
 $('.dacoit_active_no').bind('click',function(){
 hide_lightbox();
 $('.right_game_chat_player_name').removeClass('ask_dacoit_active');
+$('.right_game_chat_player_name').addClass('first_vote_active');
 has_dacoit_been_asked = 'true';
 });
 
@@ -650,9 +655,10 @@ type:"POST",
 data:{game:game,killed:dacoit_answer}
 });
 
+update_dacoit_action(data1211);
+
 dacoit_kill_person.done(function(data1211){
 hide_lightbox();
-update_dacoit_action(data1211);
 
 //$('.ask_dacoit_active').unbind('click');
 
@@ -969,11 +975,13 @@ type:"POST",
 data:{game:game,killed:killed}
 });
 
+has_dacoit_killed_anyone = 'yes';
+update_dacoit_action('Dacoit has killed '+killed);
+
 dacoit_kill_yes.done(function(data191){
 console.log(data191);
 $('.right_game_chat_player_name').removeClass('ask_dacoit_active');
 $('.right_game_chat_player_name').addClass('first_vote_active');
-update_dacoit_action(data191);
 });
 
 });
@@ -1069,6 +1077,7 @@ var final_answer = $(this).text();
 final_answer = final_answer.trim();
 final_answer = final_answer.replace("\n","");
 final_answer = final_answer.replace("undefined","");
+console.log(final_answer);
 
 
 $('.game_lightbox').html('<div class="game_lightbox_body">Are you sure you want to vote '+final_answer+'</div><div class="game_lightbox_buttons"><button class="final_vote_yes">Yes</button><button class="final_vote_no">No</button></div>');
@@ -1304,7 +1313,7 @@ data:{game_name:game}
 get_user_role.done(function(data191){
 
 if(data191 == 'mafia' || data191 == 'citizen' || data191 == 'healer' || data191 == 'dacoit' || deta191 == 'detective'){
-game_announcement.append('<div class="message">Dacoit has killed '+killed+'</div>');
+game_announcement.append('<div class="message">'+killed+'</div>');
 
 var announce_scroll = $('.left_game_announcement')[0].scrollHeight;
 $('.left_game_announcement').scrollTop(announce_scroll);
