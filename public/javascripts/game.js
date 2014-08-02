@@ -919,6 +919,8 @@ get_user_role.done(function(data141){
 
 if(data141 == 'dacoit'){
 
+$('.right_game_chat_player_name').removeClass('first_vote_active');
+
 $('.game_lightbox_title').html('God:');
 $('.game_lightbox').html('<div class="game_lightbox_body">Do you want to kill someone?</div><div class="game_lightbox_buttons"><button class="dacoit_kill_yes">Yes</button><button class="dacoit_kill_no">No</button></div>');
 show_lightbox();
@@ -927,10 +929,11 @@ $('.right_game_chat_player_name').addClass('ask_dacoit_active');
 
 $('.dacoit_kill_yes').bind('click',function(){
 
-
+hide_lightbox();
 $('.ask_dacoit_active').bind('click',function(){
 
 var killed = $(this).text();
+killed = killed.trim();
 killed = killed.replace("undefined","");
 
 var dacoit_kill_yes = $.ajax({
@@ -940,7 +943,9 @@ data:{game:game,killed:killed}
 });
 
 dacoit_kill_yes.done(function(data191){
+console.log(data191);
 $('.right_game_chat_player_name').removeClass('ask_dacoit_active');
+$('.right_game_chat_player_name').addClass('first_vote_active');
 update_dacoit_action(data191);
 });
 
@@ -950,6 +955,7 @@ update_dacoit_action(data191);
 $('.dacoit_kill_no').bind('click',function(){
 hide_lightbox();
 $('.right_game_chat_player_name').removeClass('ask_dacoit_active');
+$('.right_game_chat_player_name').addClass('first_vote_active');
 });
 
 }
@@ -1258,7 +1264,7 @@ data:{game_name:game}
 get_user_role.done(function(data191){
 
 if(data191 == 'mafia' || data191 == 'citizen' || data191 == 'healer' || data191 == 'dacoit' || deta191 == 'detective'){
-game_announcement.append(killed);
+game_announcement.append('<div class="message">Dacoit has killed '+killed+'</div>');
 }
 
 });
