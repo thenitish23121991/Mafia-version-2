@@ -1008,6 +1008,12 @@ var killed = $(this).text();
 killed = killed.trim();
 killed = killed.replace("undefined","");
 
+$('.game_lightbox_title').html('God:');
+$('.game_lightbox').html('<div class="game_lightbox_body">Are you sure you want to kill '+killed+'?</div><div class="game_lightbox_buttons"><button class="ask_dacoit_kill_yes">Yes</button><button class="ask_dacoit_kill_no">No</button></div>');
+show_lightbox();
+
+$('.ask_dacoit_kill_yes').bind('click',function(){
+
 var dacoit_kill_yes = $.ajax({
 url:"/dacoit_killed",
 type:"POST",
@@ -1018,11 +1024,17 @@ $('.right_game_chat_player_name').removeClass('ask_dacoit_active');
 $('.ask_dacoit_active').unbind('click');
 $('.right_game_chat_player_name').addClass('first_vote_active');
 
+hide_lightbox();
 has_dacoit_killed_anyone = 'yes';
 
 dacoit_kill_yes.done(function(data191){
 console.log(data191);
 
+});
+});
+
+$('.ask_dacoit_kill_no').bind('click',function(){
+hide_lightbox();
 });
 
 });
@@ -1036,7 +1048,6 @@ $('.right_game_chat_player_name').addClass('first_vote_active');
 
 }
 
-update_dacoit_action();
 
 });
 
