@@ -276,8 +276,7 @@ font-size:32px;
 color:#fff;
 font-family:'BGMedium';
 }
-.right_game_chat_player_name.player_alive:before{
-background:rgb(16,210,99);
+.right_game_chat_player_name:before{
 position:absolute;
 height:10px;
 width:10px;
@@ -293,7 +292,10 @@ background:#34ad00;
 background:#ff7200;
 }
 .right_game_chat_player_name.player_dead:before{
-background:rgba(255,255,255,.62);
+background:rgba(0,0,0,.12);
+}
+.right_game_chat_player_name.player_alive:before{
+background:rgb(16,210,99);
 }
 .game_container{
 min-height:100%;
@@ -387,6 +389,7 @@ float:left;
 width:62%;
 height:100%;
 min-height:100px;
+overflow:hidden;
 }
 .left_game_left_clear{
 clear:both;

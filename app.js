@@ -652,9 +652,20 @@ res.send(data191);
 
 app.post('/has_dacoit_killed_anyone',function(req,res){
 var game = req.body.game;
+console.log(game);
 game1.has_dacoit_killed_anyone(game,function(data191){
 console.log(data191);
 res.send(data191);
+});
+});
+
+
+app.post('/is_player_dead',function(req,res){
+var game = req.body.game;
+var player = req.session.current_user;
+game1.is_player_dead(game,player,function(data181){
+console.log(data181);
+res.send(data181);
 });
 });
 

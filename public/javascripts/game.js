@@ -15,6 +15,7 @@ var explain_yourself_messages_interval;
 var game_lightbox_title;
 var has_dacoit_been_asked;
 var has_dacoit_killed_anyone;
+var has_dacoit_killed_interval;
 
 var game_announcement = $('.left_game_announcement');
 var game = $('.left_game_title_container').text();
@@ -23,7 +24,7 @@ game = game.trim();
 $('.left_game_chat_textarea_input_button').addClass('role_message_active');
 $('.left_game_chat_textarea_input').addClass('role_message_active');
 
-get_game_messages();
+//get_game_messages();
 
 
 var mafias_interval = setInterval(function(){
@@ -77,6 +78,11 @@ if(data1212 == 'detective has answered'){
 start_first_vote();
 ask_dacoit();
 clearInterval(has_detective_interval);
+
+has_dacoit_killed_interval = setInterval(function(){
+update_dacoit_action();
+},2300);
+
 is_first_vote_done = setInterval(function(){
 console.log('is_first_vote_done');
 is_first_vote = $.ajax({
@@ -196,7 +202,7 @@ location.href = '/game?game='+game;
 
 
 get_game_messages_interval = setInterval(function(){
-get_game_messages();
+//get_game_messages();
 },1600);
 
 
@@ -298,8 +304,15 @@ data:{game_name:game}
 
 
 
+var is_player_dead = $.ajax({
+url:"/is_player_dead",
+type:"POST",
+data:{game:game}
+});
 
+is_player_dead.done(function(data19111){
 
+if(data19111 == 'no'){
 get_user_role.done(function(docs123){
 console.log(docs123);
 if(docs123 == 'healer'){
@@ -485,6 +498,10 @@ $('.ask_healer_kill_no').bind('click',function(){
 
 });
 
+}
+
+});
+
 
 }
 
@@ -544,6 +561,16 @@ $('.left_game_announcement').scrollTop(announce_scroll);
 
 $('.right_game_chat_player_name').addClass('first_vote_active');
 
+is_player_dead = $.ajax({
+url:"/is_player_dead",
+type:"POST",
+data:{game:game}
+});
+
+is_player_dead.done(function(data14111){
+
+if(data14111 == 'no'){
+
 $('.right_game_chat_player_name.first_vote_active').bind('click',function(){
 var vote_answer = $(this).text();
 vote_answer = vote_answer.trim();
@@ -587,6 +614,10 @@ hide_lightbox();
 });
 
 dacoit_is_active();
+
+});
+
+}
 
 });
 
@@ -655,7 +686,6 @@ type:"POST",
 data:{game:game,killed:dacoit_answer}
 });
 
-update_dacoit_action(data1211);
 
 dacoit_kill_person.done(function(data1211){
 hide_lightbox();
@@ -678,6 +708,8 @@ hide_lightbox();
 
 }
 
+update_dacoit_action();
+
 });
 
 }
@@ -696,6 +728,18 @@ $('.left_game_announcement').scrollTop(announce_scroll);
 
 var game = $('.left_game_title_container').text();
 game = game.trim();
+
+var is_player_dead = $.ajax({
+url:"/is_player_dead",
+type:"POST",
+data:{game:game}
+});
+
+
+is_player_dead.done(function(data17111){
+
+if(data17111 == 'no'){
+
 var get_user_role = $.ajax({
 url:"/get_current_user_role",
 type:"POST",
@@ -778,12 +822,28 @@ hide_lightbox();
 
 }
 
+});
+
+}
+
 
 function ask_mafia(){ 
 
 
 var game = $('.left_game_title_container').text();
 game = game.trim();
+
+var is_player_dead = $.ajax({
+url:"/is_player_dead",
+type:"POST",
+data:{game:game}
+});
+
+
+is_player_dead.done(function(data18111){
+
+if(data18111 == 'no'){
+
 var get_user_role = $.ajax({
 url:"/get_current_user_role",
 type:"POST",
@@ -860,6 +920,10 @@ hide_lightbox();
 
 
 }
+});
+
+}
+
 });
 }
 
@@ -941,6 +1005,16 @@ if(data101 == 'mafias init'){
 
 function ask_dacoit(){
 
+var is_player_dead = $.ajax({
+url:"/is_player_dead",
+type:"POST",
+data:{game:game}
+});
+
+is_player_dead.done(function(data16111){
+
+if(data16111 == 'no'){
+
 var get_user_role = $.ajax({
 url:"/get_current_user_role",
 type:"POST",
@@ -999,8 +1073,10 @@ update_dacoit_action();
 });
 
 
-
 }
+});
+}
+
 
 
 
@@ -1051,6 +1127,17 @@ $('.right_game_chat_player_name').removeClass('ask_mafia_active');
 $('.right_game_chat_player_name').removeClass('ask_healer_active');
 $('.right_game_chat_player_name').removeClass('ask_dacoit_active');
 $('.right_game_chat_player_name').addClass('final_vote_active');
+
+
+var is_player_dead = $.ajax({
+url:"/is_player_dead",
+type:"POST",
+data:{game:game}
+});
+
+is_player_dead.done(function(data15111){
+
+if(data15111 == 'no'){
 
 var get_user_role = $.ajax({
 url:"/get_current_user_role",
@@ -1116,6 +1203,10 @@ hide_lightbox();
 });
 });
 }
+});
+
+}
+
 });
 }
 
@@ -1283,6 +1374,13 @@ function get_explain_yourself_messages(){
 
 clearInterval(get_game_messages_interval);
 
+/*
+$('.ask_mafia_active').unbind('click');
+$('.ask_detective_active').unbind('click');
+$('.ask_healer_active').unbind('click');
+$('.ask_dacoit_active').unbind('click');
+*/
+
 var get_explain_yourself_messages = $.ajax({
 url:"/get_explain_yourself_messages",
 type:"POST",
@@ -1304,7 +1402,7 @@ $('.left_game_chat_messages_container').html(messages_data);
 }
 
 
-function update_dacoit_action(killed){
+function update_dacoit_action(){
 console.log('update dacoit action');
 
 var get_user_role = $.ajax({
@@ -1314,8 +1412,9 @@ data:{game_name:game}
 });
 
 get_user_role.done(function(data191){
-
-if(data191 == 'mafia' || data191 == 'citizen' || data191 == 'healer' || data191 == 'dacoit' || deta191 == 'detective'){
+console.log('get user role: '+data191);
+$('.ask_dacoit_active').bind('unbind');
+if(data191 == 'mafia' || data191 == 'citizen' || data191 == 'healer' || data191 == 'dacoit' || data191 == 'detective'){
 
 var has_dacoit_killed1 = $.ajax({
 url:"/has_dacoit_killed_anyone",
@@ -1324,11 +1423,15 @@ data:{game:game}
 });
 
 has_dacoit_killed1.done(function(data1911){
+console.log('has dacoit killed anyone: '+data1911);
+if(data1911 != 'no action'){
 
 game_announcement.append('<div class="message">'+data1911+'</div>');
 
 var announce_scroll = $('.left_game_announcement')[0].scrollHeight;
 $('.left_game_announcement').scrollTop(announce_scroll);
+clearInterval(has_dacoit_killed_interval);
+}
 
 });
 }
