@@ -24,7 +24,7 @@ game = game.trim();
 $('.left_game_chat_textarea_input_button').addClass('role_message_active');
 $('.left_game_chat_textarea_input').addClass('role_message_active');
 
-//get_game_messages();
+get_game_messages();
 
 
 var mafias_interval = setInterval(function(){
@@ -202,7 +202,7 @@ location.href = '/game?game='+game;
 
 
 get_game_messages_interval = setInterval(function(){
-//get_game_messages();
+get_game_messages();
 },1600);
 
 
