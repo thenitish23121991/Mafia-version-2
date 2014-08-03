@@ -76,7 +76,7 @@ data:{game:game}
 has_detective.done(function(data1212){
 if(data1212 == 'detective has answered'){
 start_first_vote();
-ask_dacoit();
+//ask_dacoit();
 clearInterval(has_detective_interval);
 
 has_dacoit_killed_interval = setInterval(function(){
@@ -525,6 +525,7 @@ inform_city.done(function(data){
 
 function start_first_vote(){
 init_votes();
+dacoit_is_active();
 game_announcement.append('<div class="message">Detective close your eyes.</div>');
 game_announcement.append('<div class="message">City open your eyes.</div>');
 
@@ -613,7 +614,6 @@ hide_lightbox();
 
 });
 
-dacoit_is_active();
 
 });
 
@@ -633,6 +633,10 @@ function suicide_bomber(){
 
 function dacoit_is_active(){
 
+$('.right_game_chat_player_name.ask_dacoit_active').bind('click',function(){
+console.log('ask dacoit active called');
+});
+
 var get_current_user_role = $.ajax({
 url:"/get_current_user_role",
 type:"POST",
@@ -642,10 +646,6 @@ data:{game_name:game}
 get_current_user_role.done(function(data12111){
 
 if(data12111 == 'dacoit'){
-
-$('.right_game_chat_player_name.ask_dacoit_active').bind('click',function(){
-console.log('ask dacoit active called');
-});
 
 
 $('.right_game_chat_player_name').removeClass('first_vote_active');
@@ -658,13 +658,38 @@ show_lightbox();
 $('.dacoit_active_yes').bind('click',function(){
 hide_lightbox();
 $('.right_game_chat_player_name').removeClass('first_vote_active');
+console.log('dacoit kill yes')
+
+$('.right_game_chat_player_name.ask_dacoit_active').bind('click',function(){
+console.log('ask dacoit active inside dacoit active');
+
+var killed = $(this).text();
+killed = killed.trim();
+
+var dacoit_kill_yes1 = $.ajax({
+url:"/dacoit_killed",
+type:"POST",
+data:{game:game,killed:killed}
+});
+
+$('.right_game_chat_player_name').removeClass('ask_dacoit_active');
+$('.right_game_chat_player_name').addClass('first_vote_active');
+
+
+dacoit_kill_yes.done1(function(data11611){
+console.log('dacoit killed yes1: '+data11611);
+
+});
+
+});
+
 });
 
 
 $('.dacoit_active_no').bind('click',function(){
 hide_lightbox();
 $('.right_game_chat_player_name').removeClass('ask_dacoit_active');
-$('.ask_dacoit_active').unbind('click');
+//$('.ask_dacoit_active').unbind('click');
 $('.right_game_chat_player_name').addClass('first_vote_active');
 has_dacoit_been_asked = 'true';
 });
@@ -1002,7 +1027,7 @@ $('.right_game_chat_player_name').addClass('ask_dacoit_active');
 $('.dacoit_kill_yes').bind('click',function(){
 
 hide_lightbox();
-$('.ask_dacoit_active').bind('click',function(){
+$('.right_game_chat_player_name.ask_dacoit_active').bind('click',function(){
 
 var killed = $(this).text();
 killed = killed.trim();
@@ -1416,6 +1441,24 @@ clearInterval(has_dacoit_killed_interval);
 }
 
 });
+
+}
+
+
+
+function dacoit_kill_yes(){
+
+}
+
+function dacoit_kill_no(){
+
+}
+
+function dacoit_kill(){
+
+}
+
+function dacoit_start_first_vote(){
 
 }
 
