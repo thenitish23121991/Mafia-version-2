@@ -643,6 +643,10 @@ get_current_user_role.done(function(data12111){
 
 if(data12111 == 'dacoit'){
 
+$('.right_game_chat_player_name.ask_dacoit_active').bind('click',function(){
+console.log('ask dacoit active called');
+});
+
 
 $('.right_game_chat_player_name').removeClass('first_vote_active');
 
@@ -660,48 +664,11 @@ $('.right_game_chat_player_name').removeClass('first_vote_active');
 $('.dacoit_active_no').bind('click',function(){
 hide_lightbox();
 $('.right_game_chat_player_name').removeClass('ask_dacoit_active');
+$('.ask_dacoit_active').unbind('click');
 $('.right_game_chat_player_name').addClass('first_vote_active');
 has_dacoit_been_asked = 'true';
 });
 
-$('.right_game_chat_player_name.ask_dacoit_active').bind('click',function(){
-console.log('ask dacoit active');
-var dacoit_answer = $(this).text();
-dacoit_answer = dacoit_answer.trim();
-
-$('.game_lightbox_title').html('Are you sure?');
-$('.game_lightbox').html('<div class="game_lightbox_body">Are you sure you want to kill '+dacoit_answer+'</div><div class="game_lightbox_buttons"><button class="dacoit_ask_kill_yes">Yes</button><button class="dacoit_ask_kill_no">No</button></div>');
-
-show_lightbox();
-
-$('.dacoit_ask_kill_yes').bind('click',function(){
-
-
-$('.right_game_chat_player_name').removeClass('ask_dacoit_active');
-has_dacoit_been_asked = 'true';
-var dacoit_kill_person = $.ajax({
-url:"/dacoit_killed",
-type:"POST",
-data:{game:game,killed:dacoit_answer}
-});
-
-
-dacoit_kill_person.done(function(data1211){
-hide_lightbox();
-
-//$('.ask_dacoit_active').unbind('click');
-
-});
-
-});
-
-$('.dacoit_ask_kill_no').bind('click',function(){
-hide_lightbox();
-//$('.right_game_chat_player_name').removeClass('ask_dacoit_active');
-
-});
-
-});
 
 
 }
@@ -1047,12 +1014,15 @@ type:"POST",
 data:{game:game,killed:killed}
 });
 
+$('.right_game_chat_player_name').removeClass('ask_dacoit_active');
+$('.ask_dacoit_active').unbind('click');
+$('.right_game_chat_player_name').addClass('first_vote_active');
+
 has_dacoit_killed_anyone = 'yes';
 
 dacoit_kill_yes.done(function(data191){
 console.log(data191);
-$('.right_game_chat_player_name').removeClass('ask_dacoit_active');
-$('.right_game_chat_player_name').addClass('first_vote_active');
+
 });
 
 });
