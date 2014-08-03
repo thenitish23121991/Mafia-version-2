@@ -643,7 +643,6 @@ get_current_user_role.done(function(data12111){
 
 if(data12111 == 'dacoit'){
 
-if(has_dacoit_been_asked == 'true'){
 
 $('.right_game_chat_player_name').removeClass('first_vote_active');
 
@@ -665,8 +664,8 @@ $('.right_game_chat_player_name').addClass('first_vote_active');
 has_dacoit_been_asked = 'true';
 });
 
-$('.ask_dacoit_active').bind('click',function(){
-
+$('.right_game_chat_player_name.ask_dacoit_active').bind('click',function(){
+console.log('ask dacoit active');
 var dacoit_answer = $(this).text();
 dacoit_answer = dacoit_answer.trim();
 
@@ -704,7 +703,6 @@ hide_lightbox();
 
 });
 
-}
 
 }
 
