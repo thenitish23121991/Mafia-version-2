@@ -390,6 +390,7 @@ width:62%;
 height:100%;
 min-height:100px;
 overflow:hidden;
+margin-top:-50px;
 }
 .left_game_left_clear{
 clear:both;
