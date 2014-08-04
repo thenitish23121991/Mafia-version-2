@@ -132,8 +132,11 @@ game1.get_game_info(game_name,function(data){
 var game_users = data[0].users;
 var current_user = req.session.current_user;
 game1.get_current_role(game_name,current_user,function(data191){
-console.log(data);
+console.log('data191: '+data191);
+console.log('data: '+data);
 var user_role = data191;
+console.log('current_user: '+current_user);
+console.log('game name: '+game_name);
 user_role = user_role.trim();
 res.render('game',{game_name:game_name,game_users:game_users,user_role:user_role});
 });
