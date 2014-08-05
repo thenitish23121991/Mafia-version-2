@@ -168,7 +168,7 @@ init_mafia();
 init_detective();
 setTimeout(function(){
 location.href = '/game?game='+game;
-},1200);
+},2300);
 
 }
 
@@ -283,11 +283,14 @@ kill_person.done(function(data){
 function ask_healer(result1){
 
 var healer_res = result1;
+var killed_person;
 var has_killed = "false";
 
 setTimeout(function(){
 game_announcement.append('<div class="message">Mafia close your eyes</div>');
 game_announcement.append('<div class="message">Healer open your eyes</div>');
+
+start_day_theme();
 
 var announce_scroll = $('.left_game_announcement')[0].scrollHeight;
 $('.left_game_announcement').scrollTop(announce_scroll);
@@ -397,6 +400,7 @@ add_healer_answer.done(function(data1211){
 
 if(data1211 == 'healer answer added'){
 hide_lightbox();
+killed_person = healer_answer_yes;
 //ask_detective();
 console.log('healer answer added');
 }
@@ -502,7 +506,7 @@ $('.ask_healer_kill_no').bind('click',function(){
 
 });
 
-
+add_dead_class(killed_person);
 }
 
 
@@ -524,6 +528,7 @@ inform_city.done(function(data){
 
 
 function start_first_vote(){
+var killed_person;
 init_votes();
 dacoit_is_active();
 game_announcement.append('<div class="message">Detective close your eyes.</div>');
@@ -636,7 +641,7 @@ function suicide_bomber(){
 
 function dacoit_is_active(){
 
-
+var killed_person;
 var get_current_user_role = $.ajax({
 url:"/get_current_user_role",
 type:"POST",
@@ -673,6 +678,7 @@ data:{game:game,killed:killed}
 });
 
 dacoit_kill_yes1.done(function(data11611){
+killed_person = killed;
 console.log('dacoit killed yes1: '+data11611);
 $('.ask_dacoit_active').unbind('click');
 $('.right_game_chat_player_name').removeClass('ask_dacoit_active');
@@ -725,8 +731,9 @@ type:"POST",
 data:{game:game,vote_answer:vote_answer}
 });
 
-vote_answer1.done(function(data16111){
 hide_lightbox();
+vote_answer1.done(function(data16111){
+
 console.log(data16111);
 });
 
@@ -746,7 +753,7 @@ hide_lightbox();
 }
 
 update_dacoit_action();
-
+add_dead_class(killed_person);
 });
 
 }
@@ -1179,6 +1186,8 @@ $('.right_game_chat_player_name').removeClass('ask_healer_active');
 $('.right_game_chat_player_name').removeClass('ask_dacoit_active');
 $('.right_game_chat_player_name').addClass('final_vote_active');
 
+$('.right_game_chat_player_name').unbind('click');
+
 var is_player_dead = $.ajax({
 url:"/is_player_dead",
 type:"POST",
@@ -1238,7 +1247,6 @@ data:{game:game,answer:final_answer}
 
 final_answer_add.done(function(data161){
 hide_lightbox();
-$('.right_game_chat_player_name').removeClass('final_vote_active');
 if(data161 == 'final vote done'){
 
 }
@@ -1510,6 +1518,19 @@ function dacoit_kill(){
 
 function dacoit_start_first_vote(){
 
+}
+
+
+function start_day_theme(){
+$('.game_container').css({
+'background-image' : 'url(../images/day.jpg)'
+});
+}
+
+
+function add_dead_class(id){
+$("#right_game_chat_player_"+id).removeClass('player_alive');
+$("#right_game_chat_player_"+id).addClass('player_dead');
 }
 
 

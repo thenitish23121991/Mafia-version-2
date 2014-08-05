@@ -14,7 +14,7 @@
 GOD
 </div>
 <% for(var i=0;i<game_users.length;i++){ %>
-<div class="right_game_chat_player_name player_<%= game_users[i].status %>">
+<div id="right_game_chat_player_<%= game_users[i].name %>" class="right_game_chat_player_name player_<%= game_users[i].status %>">
 <%= game_users[i].name %>
 </div>
 <% } %>
@@ -33,7 +33,7 @@ GOD
 
 <div class="left_game_announcement_container centered">
 <div class="left_game_announcement_title">
-<img src="images/god_icon.jpg" /> GOD SAYS:
+<!-- <img src="images/god_icon.jpg" /> --> GOD SAYS:
 </div>
 <div class="left_game_announcement_container1">
 <div class="left_game_announcement">
