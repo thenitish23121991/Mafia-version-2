@@ -250,7 +250,7 @@ $('.left_game_chat_messages_container').scrollTop(scroll_height);
 
 $('.left_game_quit_game_button').bind('click',function(){
 
-location.href = '/review';
+location.href = '/';
 });
 
 //get_game();
