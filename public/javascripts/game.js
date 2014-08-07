@@ -957,6 +957,8 @@ hide_lightbox();
 });
 
 });
+}else{
+$('.right_game_chat_player_name').removeClass('ask_mafia_active');
 }
 
 
