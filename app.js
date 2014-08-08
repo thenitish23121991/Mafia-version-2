@@ -376,9 +376,49 @@ app.post('/get_game_messages',function(req,res){
 var game = req.body.game;
 var player = req.session.current_user;
 game1.get_current_role(game,player,function(docs12){
-game1.get_game_messages(game,docs12,function(docs1212){
+if(docs12 != 'mafia'){
+game1.get_game_messages(game,'others',function(docs1212){
 res.send(docs1212);
 });
+}
+});
+});
+
+
+app.post('/add_night_message',function(req,res){
+var game = req.body.game;
+var player = req.session.current_user;
+var message = req.body.message;
+game1.add_night_message(game,message,player,function(data1918){
+console.log(data1918);
+res.send(data1918);
+});
+});
+
+
+app.post('/add_day_message',function(req,res){
+var game = req.body.game;
+var player = req.session.current_user;
+var message = req.body.message;
+game1.add_day_message(game,message,player,function(data1917)}
+console.log(data1917);
+res.send(data1917);
+});
+});
+
+app.post('/get_day_messages',function(req,res){
+var game = req.body.game;
+game1.get_day_messages(game,function(data1917)}
+console.log(data1917);
+res.send(data1917);
+});
+});
+
+app.post('/get_night_messages',function(req,res){
+var game = req.body.game;
+game1.get_night_messages(game,function(data1917)}
+console.log(data1917);
+res.send(data1917);
 });
 });
 

@@ -16,6 +16,8 @@ var game_lightbox_title;
 var has_dacoit_been_asked;
 var has_dacoit_killed_anyone;
 var has_dacoit_killed_interval;
+var get_day_messages_interval;
+var get_night_messages_interval;
 
 var game_announcement = $('.left_game_announcement');
 var game = $('.left_game_title_container').text();
@@ -206,8 +208,8 @@ location.href = '/game?game='+game;
 },2300);
 
 
-get_game_messages_interval = setInterval(function(){
-get_game_messages();
+get_day_messages_interval = setInterval(function(){
+get_day_messages();
 },1600);
 
 
@@ -290,8 +292,22 @@ function ask_healer(result1){
 var healer_res = result1;
 var killed_person;
 var has_killed = "false";
+clearInterval(get_day_messages_interval);
+
+get_night_messages_interval = setInterval(function(){
+get_night_messages();
+},1600);
 
 setTimeout(function(){
+
+$('#left_game_chat_messages_container').addClass('explain_yourself_message_active');
+$('#left_game_chat_textarea_input_button').removeClass('left_game_chat_textarea_input_button');
+$('#left_game_chat_textarea_input').removeClass('left_game_chat_textarea_input');
+$('#left_game_chat_textarea_input_button').removeClass('role_message_active');
+$('#left_game_chat_textarea_input').removeClass('role_message_active');
+$('#left_game_chat_textarea_input_button').addClass('explain_yourself_message_active');
+$('#left_game_chat_textarea_input').addClass('explain_yourself_message_active');
+
 game_announcement.append('<div class="message">Mafia close your eyes</div>');
 game_announcement.append('<div class="message">Healer open your eyes</div>');
 
@@ -1285,7 +1301,7 @@ message = message.trim();
 if(message != ''){
 
 var add_game_message = $.ajax({
-url:"/add_game_message",
+url:"/add_day_message",
 type:"POST",
 data:{game:game,message:message}
 });
@@ -1313,7 +1329,7 @@ message = message.trim();
 if(message != ''){
 
 var add_game_message = $.ajax({
-url:"/add_game_message",
+url:"/add_day_message",
 type:"POST",
 data:{game:game,message:message}
 });
@@ -1362,18 +1378,6 @@ function start_explain_yourself_method(){
 $('.left_game_chat_textarea_input').unbind('keypress');
 $('.left_game_chat_textarea_input_button').unbind('click');
 
-$('#left_game_chat_messages_container').addClass('explain_yourself_message_active');
-$('#left_game_chat_textarea_input_button').removeClass('left_game_chat_textarea_input_button');
-$('#left_game_chat_textarea_input').removeClass('left_game_chat_textarea_input');
-$('#left_game_chat_textarea_input_button').removeClass('role_message_active');
-$('#left_game_chat_textarea_input').removeClass('role_message_active');
-$('#left_game_chat_textarea_input_button').addClass('explain_yourself_message_active');
-$('#left_game_chat_textarea_input').addClass('explain_yourself_message_active');
-
-clearInterval(get_game_messages_interval);
-get_explain_yourself_messages_interval = setInterval(function(){
-get_explain_yourself_messages();
-},1600);
 game_announcement.append('<div class="message">Explain yourself. You have 2 minutes.</div>');
 
 var announce_scroll = $('.left_game_announcement')[0].scrollHeight;
@@ -1388,7 +1392,7 @@ message = message.trim();
 if(message != ''){
 
 var add_explain_yourself_message = $.ajax({
-url:"/add_explain_yourself_message",
+url:"/add_night_message",
 type:"POST",
 data:{game:game,message:message}
 });
@@ -1418,7 +1422,7 @@ console.log('explain yourself message: '+message);
 if(message != ''){
 
 var add_explain_yourself_message = $.ajax({
-url:"/add_explain_yourself_message",
+url:"/add_night_message",
 type:"POST",
 data:{game:game,message:message}
 });
@@ -1525,6 +1529,62 @@ function dacoit_kill(){
 }
 
 function dacoit_start_first_vote(){
+
+}
+
+
+function get_day_messages(){
+
+
+get_day_messages1 = $.ajax({
+url:"/get_day_messages",
+type:"POST",
+data:{game:game}
+});
+
+get_day_messages1.done(function(data12){
+var messages_data;
+
+$.each(data1211,function(key,value){
+messages_data += '<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+value['player']+' says:</span><span class="left_game_chat_message"> '+value['message']+'</span></div>';
+
+});
+
+messages_data = messages_data.replace("undefined","");
+
+$('.left_game_chat_messages_container').html(messages_data);
+var scroll_height = $('.left_game_chat_messages_container')[0].scrollHeight();
+console.log(scroll_height);
+$('.left_game_chat_messages_container').scrollTop(scroll_height);
+});
+
+}
+
+
+function get_night_messages(){
+
+
+get_night_messages1 = $.ajax({
+url:"/get_night_messages",
+type:"POST",
+data:{game:game}
+});
+
+get_night_messages1.done(function(data12){
+var messages_data;
+
+$.each(data1211,function(key,value){
+messages_data += '<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+value['player']+' says:</span><span class="left_game_chat_message"> '+value['message']+'</span></div>';
+
+});
+
+messages_data = messages_data.replace("undefined","");
+
+$('.left_game_chat_messages_container').html(messages_data);
+var scroll_height = $('.left_game_chat_messages_container')[0].scrollHeight();
+console.log(scroll_height);
+$('.left_game_chat_messages_container').scrollTop(scroll_height);
+});
 
 }
 
