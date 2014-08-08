@@ -12,6 +12,7 @@ $(this).parent('.middle_games_show_person').css({
 });
 
 $('.middle_home_start_button').bind('click',function(e){
+e.preventDefault();
 var nick = $('.middle_nick_input').val();
 var add_nick = $.ajax({
 url:"/add_nick",
