@@ -46,6 +46,11 @@ data:{game:game}
 
 get_mafia_answer.done(function(data1211){
 console.log('get mafia answer: '+data1211.answer);
+if(data1211 == 'no result'){
+game_announcement.append('<div class="message">Nobody is dead</div>');
+}else{
+game_announcement.append('<div class="message">He/She is dead</div>');
+}
 //console.log('interval: '+mafia_res_answer);
 ask_healer(data1211.answer);
 clearInterval(mafias_interval);
@@ -898,9 +903,6 @@ get_user_role.done(function(data12){
 console.log(data12);
 if(data12 == 'mafia'){
 var game_announcement = $('.left_game_announcement');
-setTimeout(function(){
-game_announcement.append('<div class="message">Whom do you want to kill?</div>');
-},600);
 
 var has_mafia_voted = $.ajax({
 url:"/has_mafia_voted",
@@ -1342,6 +1344,9 @@ data:{}
 mafia_answers.done(function(data){
 
 if(data == 'mafia'){
+setTimeout(function(){
+game_announcement.append('<div class="message">Whom do you want to kill?</div>');
+},600);
 ask_mafia();
 }else{
 
