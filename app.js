@@ -400,7 +400,7 @@ app.post('/add_day_message',function(req,res){
 var game = req.body.game;
 var player = req.session.current_user;
 var message = req.body.message;
-game1.add_day_message(game,message,player,function(data1917)}
+game1.add_day_message(game,message,player,function(data1917){
 console.log(data1917);
 res.send(data1917);
 });
@@ -408,7 +408,7 @@ res.send(data1917);
 
 app.post('/get_day_messages',function(req,res){
 var game = req.body.game;
-game1.get_day_messages(game,function(data1917)}
+game1.get_day_messages(game,function(data1917){
 console.log(data1917);
 res.send(data1917);
 });
@@ -416,7 +416,7 @@ res.send(data1917);
 
 app.post('/get_night_messages',function(req,res){
 var game = req.body.game;
-game1.get_night_messages(game,function(data1917)}
+game1.get_night_messages(game,function(data1917){
 console.log(data1917);
 res.send(data1917);
 });
