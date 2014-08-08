@@ -76,6 +76,8 @@ GUIDELINES:
 
 <script>
 
+$('.middle_home_start_button').hide();
+
 window.fbAsyncInit = function(){
 FB.init({
 appId:'762188780523189',
@@ -93,6 +95,10 @@ FB.getLoginStatus(function(response){
 if(response.status == 'connected'){
 FB.api('/me',function(response){
 
+$('.middle_facebook_button').hide();
+$('.middle_home_start_button').show();
+
+/*
 var nick = response.name;
 
 var add_nick = $.ajax({
@@ -106,6 +112,7 @@ add_nick.done(function(data){
 location.href = '/screen1';
 
 }); 
+*/
 
 });
 console.log(response);
