@@ -1,25 +1,48 @@
 
 $(document).ready(function(){
 
+var page_limit = 0;
+var live_games_arr = new Array();
+var new_live_games_arr = new Array();
+var live_games_data;
 
 var get_live_games = $.ajax({
 url:"/get_live_games",
 type:"POST",
-data:{}
+data:{limit:page_limit}
 });
 
 
-get_live_games.done(function(data){
+$('.middle_games_show_more_button').bind('click',function(){
+load_more_games();
+});
 
-var live_games_data;
+function load_more_games(){
 
+if(page_limit == 0){
+$('.middle_games_show_container').html('');
+}
 
-$.each(data,function(key,value){
+var slice_from = page_limit*5;
+new_live_games_arr = new Array();
+new_live_games_arr = live_games_arr.slice(slice_from,slice_from+5);
+
+var live_games_data = "";
+
+$.each(new_live_games_arr,function(key,value){
 live_games_data += '<div class="middle_live_games_item"><span class="middle_live_games_name">'+value['name']+'</span>('+'<span class="middle_live_games_count">'+value['users'].length+'</span>)</div>';
 });
 live_games_data = live_games_data.replace("undefined","");
 
-$('.middle_games_show_container').html(live_games_data);
+$('.middle_games_show_container').append(live_games_data);
+page_limit = page_limit+1;
+}
+
+
+get_live_games.done(function(data){
+
+live_games_arr = data;
+load_more_games();
 
 
 

@@ -202,7 +202,9 @@ res.send(req.session.current_user);
 
 
 app.post('/get_live_games',function(req,res){
-game1.get_live_games(function(docs){
+var limit1 = req.body.limit;
+console.log(limit1);
+game1.get_live_games(limit1,function(docs){
 console.log('live games: '+docs);
 res.send(docs);
 });
