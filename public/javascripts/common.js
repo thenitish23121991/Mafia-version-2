@@ -13,8 +13,9 @@ $(this).parent('.middle_games_show_person').css({
 
 $('.middle_home_start_button').bind('click',function(e){
 e.preventDefault();
-console.log('middle home start button');
 var nick = $('.middle_nick_input').val();
+
+console.log(nick);
 var add_nick = $.ajax({
 url:"/add_nick",
 type:"POST",
