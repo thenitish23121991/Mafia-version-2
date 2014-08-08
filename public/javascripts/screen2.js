@@ -103,11 +103,14 @@ var game_players_data;
 console.log(data);
 
 $.each(data[0].users,function(key,value){
+if(value['name'] != 'god'){
 game_players_data += '<div class="middle_games_show_person_name">'+value['name']+'</div>';
+}
 });
 
 game_players_data = game_players_data.replace("undefined","");
-$('.middle_games_show_container').html(game_players_data);
+$('.middle_games_show_container').html('<div class="middle_games_show_person_name">GOD</div>');
+$('.middle_games_show_container').append(game_players_data);
 
 });
 
