@@ -742,3 +742,7 @@ margin-left:8px;
 .middle_games_show_person_name{
 cursor:pointer;
 }
+.middle_dismiss_game_button{
+margin-top:22px;
+background:#3b5998;
+}
