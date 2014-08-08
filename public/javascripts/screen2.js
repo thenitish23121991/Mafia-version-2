@@ -16,6 +16,9 @@ data:{game:game}
 get_user_role12.done(function(data1291){
 if(data1291 == 'yes'){
 $('.middle_start_new_game_button_screen2').show();
+
+$('.middle_games_show_person_name').append('<span class="kickout_player_element">x</span>');
+
 }else{
 $('.middle_start_new_game_button_screen2').hide();
 }

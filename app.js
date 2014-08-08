@@ -89,6 +89,15 @@ console.log(data10001);
 },1000*60*60);
 
 
+app.post('/kickout_player',function(req,res){
+var game = req.body.game;
+var player = req.body.player;
+game1.kickout_player(game,player,function(data19191){
+console.log(data19191);
+res.send(data19191);
+});
+});
+
 
 function get_current_role(game,user,req){
 console.log('get current role');
