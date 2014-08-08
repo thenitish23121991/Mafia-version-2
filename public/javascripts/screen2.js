@@ -7,7 +7,19 @@ game = game.trim();
 
 var has_game_started_interval;
 
+
 has_game_started_interval = setInterval(function(){
+
+var get_game_details = $.ajax({
+url:"/get_game_details",
+type:"POST",
+data:{game:game}
+});
+
+
+get_game_details.done(function(data1001){
+console.log(data1001);
+if(data1001.length != 0){
 
 var has_game_started = $.ajax({
 url:"/has_host_started_game",
@@ -20,6 +32,13 @@ console.log(data101);
 if(data101 == 'yes'){
 location.href = '/game?game='+game;
 }
+});
+
+}else{
+clearInterval(has_game_started_interval);
+location.href = '/screen1';
+}
+
 });
 
 },2300);

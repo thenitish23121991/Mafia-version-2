@@ -73,6 +73,22 @@ app.use(function(err, req, res, next) {
 });
 
 
+setInterval(function(){
+var live_games = new Array();
+game1.get_live_games(0,function(data181){
+console.log(data181);
+live_games = data181;
+live_games.forEach(function(element,index){
+var game_name = live_games[index].name;
+game1.has_game_expired(game_name,function(data10001){
+console.log(data10001);
+});
+});
+});
+
+},6000);
+
+
 
 function get_current_role(game,user,req){
 console.log('get current role');
@@ -211,6 +227,15 @@ res.send(docs);
 });
 
 
+app.post('/has_game_expired',function(req,res){
+var game = req.body.game;
+game1.has_game_expired(game,function(data191){
+console.log('has game expired'+data191);
+res.send(data191);
+});
+});
+
+
 app.post('/add_player_to_game',function(req,res){
 var game_name = req.body.game_name;
 var player_name = req.session.current_user;
@@ -336,6 +361,14 @@ game1.get_current_role(game,player,function(docs12){
 game1.get_game_messages(game,docs12,function(docs1212){
 res.send(docs1212);
 });
+});
+});
+
+app.post('/get_game_details',function(req,res){
+var game = req.body.game;
+game1.get_game_info(game,function(docs1991){
+console.log(docs1991);
+res.send(docs1991);
 });
 });
 

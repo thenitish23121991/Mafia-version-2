@@ -5,6 +5,23 @@ var page_limit = 0;
 var live_games_arr = new Array();
 var new_live_games_arr = new Array();
 var live_games_data;
+var has_game_expired_interval;
+
+
+has_game_expired_interval = setInterval(function(){
+
+var has_game_expired = $.ajax({
+url:"/has_game_expired",
+type:"POST",
+data:{game:game}
+});
+
+
+has_game_expired.done(function(data1911){
+console.log(data1911);
+});
+
+},6000);
 
 var get_live_games = $.ajax({
 url:"/get_live_games",
