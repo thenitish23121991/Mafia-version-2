@@ -7,6 +7,21 @@ game = game.trim();
 
 var has_game_started_interval;
 
+var get_user_role12 = $.ajax({
+url:"/is_current_user_host",
+type:"POST",
+data:{game:game}
+});
+
+get_user_role12.done(function(data1291){
+if(data1291 == 'yes'){
+$('.middle_start_new_game_button_screen2').show();
+}else{
+$('.middle_start_new_game_button_screen2').hide();
+}
+});
+
+
 
 has_game_started_interval = setInterval(function(){
 
