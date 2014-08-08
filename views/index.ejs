@@ -87,6 +87,42 @@ version:'v2.0'
 });
 
 
+FB.getLoginStatus(function(response){
+
+if(response.status == 'connected'){
+FB.api('/me',function(response){
+
+$('.middle_facebook_button').hide();
+$('.middle_home_start_button').show();
+
+/*
+var nick = response.name;
+
+var add_nick = $.ajax({
+url:"/add_nick",
+type:"POST",
+data:{nick:nick}
+}); 
+
+add_nick.done(function(data){
+
+location.href = '/screen1';
+
+}); 
+*/
+
+});
+console.log(response);
+}else if(response.status == 'not_authorized'){
+FB.login();
+}else{
+FB.login();
+}
+
+});
+
+
+
 $('.middle_facebook_button').bind('click',function(){
 
 FB.getLoginStatus(function(response){
