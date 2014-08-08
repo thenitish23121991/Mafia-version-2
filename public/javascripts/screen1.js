@@ -35,13 +35,15 @@ type:"POST",
 data:{game_name:game_name}
 });
 
-setTimeout(function(){
-location.href = '/screen2?game='+game_name;
-},600);
 
 
 add_player_to_game.done(function(data){
+console.log(data);
+if(data == 'player count exceeded'){
 
+}else{
+location.href = '/screen2?game='+game_name;
+}
 });
 
 });

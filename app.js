@@ -214,7 +214,7 @@ var game_name = req.body.game_name;
 var player_name = req.session.current_user;
 console.log('current player: '+player_name);
 game1.add_player_to_game(game_name,player_name,function(docs){
-console.log(docs[0].users);
+res.send(docs);
 });
 setTimeout(function(){
 get_current_role(game_name,player_name,req);
@@ -536,6 +536,34 @@ var player = req.session.current_user;
 game1.has_mafia_voted(game,player,function(data191){
 console.log('has mafia voted: '+data191);
 res.send(data191);
+});
+});
+
+
+app.post('/start_the_game',function(req,res){
+var game = req.body.game;
+game1.start_the_game(game,function(data171){
+console.log(data171);
+res.send(data171);
+});
+});
+
+
+app.post('/is_current_user_host',function(req,res){
+var game = req.body.game;
+var player = req.session.current_user;
+game1.is_current_user_host(game,player,function(data1991){
+console.log(data1991);
+res.send(data1991);
+});
+});
+
+
+app.post('/has_host_started_game',function(req,res){
+var game = req.body.game;
+game1.has_host_started_game(game,function(data14111){
+console.log(data14111);
+res.send(data14111);
 });
 });
 
