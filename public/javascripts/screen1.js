@@ -59,6 +59,11 @@ page_limit = page_limit+1;
 get_live_games.done(function(data){
 
 live_games_arr = data;
+
+if(live_games_arr.length == 0){
+$('.middle_games_show_more_button').hide()
+}
+
 load_more_games();
 
 
