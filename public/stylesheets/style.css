@@ -733,8 +733,12 @@ margin-bottom:14px;
 margin-top:59px;
 }
 .kickout_player_element{
-color:#fff;
+color:#333;
 height:16px;
 width:16px;
 font-size:16px;
+margin-left:8px;
+}
+.middle_games_show_person_name{
+cursor:pointer;
 }

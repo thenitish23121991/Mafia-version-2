@@ -92,9 +92,18 @@ console.log(data10001);
 app.post('/kickout_player',function(req,res){
 var game = req.body.game;
 var player = req.body.player;
+console.log('kickout player: '+game+'<br/>'+player);
 game1.kickout_player(game,player,function(data19191){
 console.log(data19191);
 res.send(data19191);
+});
+});
+
+
+app.post('/dismiss_game',function(req,res){
+var game = req.body.game;
+game1.dismiss_game(game,function(data191){
+res.send(data191);
 });
 });
 
@@ -376,7 +385,7 @@ res.send(docs1212);
 app.post('/get_game_details',function(req,res){
 var game = req.body.game;
 game1.get_game_info(game,function(docs1991){
-console.log(docs1991);
+//console.log(docs1991);
 res.send(docs1991);
 });
 });
@@ -606,7 +615,7 @@ res.send(data1991);
 app.post('/has_host_started_game',function(req,res){
 var game = req.body.game;
 game1.has_host_started_game(game,function(data14111){
-console.log(data14111);
+//console.log(data14111);
 res.send(data14111);
 });
 });

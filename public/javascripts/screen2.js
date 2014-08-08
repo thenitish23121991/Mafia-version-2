@@ -16,8 +16,24 @@ data:{game:game}
 get_user_role12.done(function(data1291){
 if(data1291 == 'yes'){
 $('.middle_start_new_game_button_screen2').show();
+$('.middle_dismiss_game_button').show();
 
-$('.middle_games_show_person_name').append('<span class="kickout_player_element">x</span>');
+
+$('.middle_dismiss_game_button').bind('click',function(){
+
+var dismiss_game1 = $.ajax({
+url:"/dismiss_game",
+type:"POST",
+data:{game:game}
+});
+
+dismiss_game1.done(function(data181){
+if(data181 == 'game dismissed'){
+location.href = '/screen1';
+}
+});
+
+});
 
 }else{
 $('.middle_start_new_game_button_screen2').hide();
@@ -136,18 +152,62 @@ data:{game:game}
 
 get_game_players.done(function(data){
 
+var get_user_role13 = $.ajax({
+url:"/is_current_user_host",
+type:"POST",
+data:{game:game}
+});
+
+
+get_user_role13.done(function(data9912){
+
+
+
 var game_players_data;
 console.log(data);
 
 $.each(data[0].users,function(key,value){
 if(value['name'] != 'god'){
-game_players_data += '<div class="middle_games_show_person_name">'+value['name']+'</div>';
+game_players_data += '<div class="middle_games_show_person_name"><span class="middle_games_show_person">'+value['name']+'</span></div>';
 }
 });
 
 game_players_data = game_players_data.replace("undefined","");
 $('.middle_games_show_container').html('<div class="middle_games_show_person_name">GOD</div>');
 $('.middle_games_show_container').append(game_players_data);
+
+
+if(data9912 == 'yes'){
+console.log('current user host');
+$('.middle_games_show_person_name').append('<span class="kickout_player_element">X</span>');
+
+$('.middle_games_show_person_name').bind('click',function(){
+
+var player1 = $(this).children('.middle_games_show_person').text();
+player1 = player1.trim();
+
+console.log('middle games : '+player1);
+
+var kickout_player1 = $.ajax({
+url:"/kickout_player",
+type:"POST",
+data:{game:game,player:player1}
+});
+
+kickout_player1.done(function(data1811){
+console.log(data1811);
+if(data1811 == 'player removed'){
+location.href = '/screen2?game='+game;
+}
+
+});
+
+});
+
+}
+
+});
+
 
 });
 

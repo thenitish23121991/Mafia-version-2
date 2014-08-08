@@ -53,6 +53,34 @@ live_games_data = live_games_data.replace("undefined","");
 
 $('.middle_games_show_container').append(live_games_data);
 page_limit = page_limit+1;
+
+$('.middle_live_games_item').bind('click',function(){
+
+var game_name = $(this).children('.middle_live_games_name').text();
+game_name = game_name.trim();
+console.log(game_name);
+
+var add_player_to_game = $.ajax({
+url:"/add_player_to_game",
+type:"POST",
+data:{game_name:game_name}
+});
+
+
+
+add_player_to_game.done(function(data){
+console.log(data);
+if(data == 'player count exceeded'){
+
+}else{
+location.href = '/screen2?game='+game_name;
+}
+});
+
+});
+
+
+
 }
 
 
@@ -70,7 +98,7 @@ load_more_games();
 
 $('.middle_live_games_item').bind('click',function(){
 
-var game_name = $(this).children('.middle_live_games_name').text();
+var game_name = $(this).text();
 game_name = game_name.trim();
 console.log(game_name);
 
