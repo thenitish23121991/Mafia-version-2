@@ -8,21 +8,6 @@ var live_games_data;
 var has_game_expired_interval;
 
 
-has_game_expired_interval = setInterval(function(){
-
-var has_game_expired = $.ajax({
-url:"/has_game_expired",
-type:"POST",
-data:{game:game}
-});
-
-
-has_game_expired.done(function(data1911){
-console.log(data1911);
-});
-
-},6000);
-
 var get_live_games = $.ajax({
 url:"/get_live_games",
 type:"POST",
@@ -58,7 +43,7 @@ $('.middle_live_games_item').bind('click',function(){
 
 var game_name = $(this).children('.middle_live_games_name').text();
 game_name = game_name.trim();
-console.log(game_name);
+console.log('game: '+game_name);
 
 var add_player_to_game = $.ajax({
 url:"/add_player_to_game",
@@ -95,10 +80,10 @@ $('.middle_games_show_more_button').hide()
 load_more_games();
 
 
-
+/*
 $('.middle_live_games_item').bind('click',function(){
 
-var game_name = $(this).text();
+var game_name = $(this).children('.middle_live_games_name').text();
 game_name = game_name.trim();
 console.log(game_name);
 
@@ -115,11 +100,13 @@ console.log(data);
 if(data == 'player count exceeded'){
 
 }else{
-location.href = '/screen2?game='+game_name;
+//location.href = '/screen2?game='+game_name;
 }
 });
 
 });
+
+*/
 
 
 });

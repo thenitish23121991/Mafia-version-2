@@ -10,9 +10,6 @@
 <div class="right_game_container">
 <div class="right_game_chat_container">
 <div class="right_game_chat_player_container">
-<div class="right_game_chat_player_name player_alive god">
-GOD
-</div>
 <% for(var i=0;i<game_users.length;i++){ %>
 <div id="right_game_chat_player_<%= game_users[i].name %>" class="right_game_chat_player_name player_<%= game_users[i].status %>">
 <%= game_users[i].name %>

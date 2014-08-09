@@ -259,11 +259,22 @@ var game_name = req.body.game_name;
 var player_name = req.session.current_user;
 console.log('current player: '+player_name);
 game1.add_player_to_game(game_name,player_name,function(docs){
+console.log(docs);
 res.send(docs);
 });
 setTimeout(function(){
 get_current_role(game_name,player_name,req);
 },2000);
+});
+
+
+app.post('/is_player_alive_and_awake',function(req,res){
+var game = req.body.game;
+var player = req.session.current_user;
+game1.is_player_alive_and_awake(game,player,function(data191){
+console.log(data191);
+res.send(data191);
+});
 });
 
 
@@ -790,6 +801,14 @@ var player = req.session.current_user;
 game1.is_player_dead(game,player,function(data181){
 console.log(data181);
 res.send(data181);
+});
+});
+
+app.post('/make_players_awake',function(req,res){
+var game = req.body.game;
+game1.make_players_awake(game,function(data1991){
+console.log(data1991);
+res.send(data1991);
 });
 });
 

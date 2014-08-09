@@ -18,6 +18,7 @@ var has_dacoit_killed_anyone;
 var has_dacoit_killed_interval;
 var get_day_messages_interval;
 var get_night_messages_interval;
+var current_game_time = 'night';
 
 var game_announcement = $('.left_game_announcement');
 var game = $('.left_game_title_container').text();
@@ -208,9 +209,6 @@ location.href = '/game?game='+game;
 },2300);
 
 
-get_day_messages_interval = setInterval(function(){
-get_day_messages();
-},1600);
 
 
 
@@ -266,6 +264,11 @@ location.href = '/';
 start_game();
 
 function start_game(){
+
+setTimeout(function(){
+game_announcement.append('<div class="message">Whom do you want to kill?</div>');
+},600);
+
 ask_mafia();
 }
 
@@ -289,16 +292,14 @@ kill_person.done(function(data){
 
 function ask_healer(result1){
 
-var healer_res = result1;
-var killed_person;
-var has_killed = "false";
-clearInterval(get_day_messages_interval);
+current_game_time = 'day';
 
-get_night_messages_interval = setInterval(function(){
-get_night_messages();
+clearInterval(get_night_messages_interval);
+
+get_day_messages_interval = setInterval(function(){
+get_day_messages();
 },1600);
-
-setTimeout(function(){
+make_players_alive();
 
 $('#left_game_chat_messages_container').addClass('explain_yourself_message_active');
 $('#left_game_chat_textarea_input_button').removeClass('left_game_chat_textarea_input_button');
@@ -307,6 +308,16 @@ $('#left_game_chat_textarea_input_button').removeClass('role_message_active');
 $('#left_game_chat_textarea_input').removeClass('role_message_active');
 $('#left_game_chat_textarea_input_button').addClass('explain_yourself_message_active');
 $('#left_game_chat_textarea_input').addClass('explain_yourself_message_active');
+
+$('.left_game_chat_textarea_input').unbind('click');
+$('.left_game_chat_textarea_input_button').unbind('click');
+
+
+var healer_res = result1;
+var killed_person;
+var has_killed = "false";
+
+setTimeout(function(){
 
 game_announcement.append('<div class="message">Mafia close your eyes</div>');
 game_announcement.append('<div class="message">Healer open your eyes</div>');
@@ -1294,9 +1305,47 @@ hide_lightbox();
 
 
 $('.left_game_chat_textarea_input.role_message_active').bind('keypress',function(e){
+
+var is_player_alive_and_awake = $.ajax({
+url:"/is_player_alive_and_awake",
+type:"POST",
+data:{game:game}
+});
+
+is_player_alive_and_awake.done(function(data191){
+console.log(data191);
+if(data191 == 'yes'){
+
 if(e.keyCode == 13){
+
+if(current_game_time == 'night'){
 var message = $('.left_game_chat_textarea_input').val();
 message = message.trim();
+
+if(message != ''){
+
+var add_game_message = $.ajax({
+url:"/add_night_message",
+type:"POST",
+data:{game:game,message:message}
+});
+
+add_game_message.done(function(data12){
+
+console.log(data12);
+
+$('.left_game_chat_messages_container').append('<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div>');
+var scroll_height = $('.left_game_chat_messages_container')[0].scrollHeight;
+$('.left_game_chat_messages_container').scrollTop(scroll_height);
+$('.left_game_chat_textarea_input').val('');
+
+});
+}
+}else if(current_game_time == 'day'){
+
+var message = $('#left_game_chat_textarea_input').val();
+message = message.trim();
+console.log(message);
 
 if(message != ''){
 
@@ -1313,18 +1362,59 @@ console.log(data12);
 $('.left_game_chat_messages_container').append('<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div>');
 var scroll_height = $('.left_game_chat_messages_container')[0].scrollHeight;
 $('.left_game_chat_messages_container').scrollTop(scroll_height);
-$('.left_game_chat_textarea_input').val('');
+$('#left_game_chat_textarea_input').val('');
 
 });
 }
+
 }
+
+}
+}
+});
 });
 
 
 
 $('.left_game_chat_textarea_input_button.role_message_active').bind('click',function(){
+
+var is_player_alive_and_awake = $.ajax({
+url:"/is_player_alive_and_awake",
+type:"POST",
+data:{game:game}
+});
+
+is_player_alive_and_awake.done(function(data191){
+console.log(data191);
+if(data191 == 'yes'){
+if(current_game_time == 'night'){
 var message = $('.left_game_chat_textarea_input').val();
 message = message.trim();
+
+if(message != ''){
+
+var add_game_message = $.ajax({
+url:"/add_night_message",
+type:"POST",
+data:{game:game,message:message}
+});
+
+add_game_message.done(function(data12){
+
+console.log(data12);
+
+$('.left_game_chat_messages_container').append('<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div>');
+var scroll_height = $('.left_game_chat_messages_container')[0].scrollHeight;
+$('.left_game_chat_messages_container').scrollTop(scroll_height);
+$('.left_game_chat_textarea_input').val('');
+
+});
+}
+}else if(current_game_time == 'day'){
+
+var message = $('#left_game_chat_textarea_input').val();
+message = message.trim();
+console.log(message);
 
 if(message != ''){
 
@@ -1339,15 +1429,16 @@ add_game_message.done(function(data12){
 console.log(data12);
 
 $('.left_game_chat_messages_container').append('<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div>');
-$('#left_game_chat_textarea_input').val('');
 var scroll_height = $('.left_game_chat_messages_container')[0].scrollHeight;
-console.log(scroll_height);
 $('.left_game_chat_messages_container').scrollTop(scroll_height);
-$('.left_game_chat_textarea_input').val('');
+$('#left_game_chat_textarea_input').val('');
 
 });
 }
 
+}
+}
+});
 });
 
 
@@ -1360,10 +1451,11 @@ data:{}
 
 mafia_answers.done(function(data){
 
-if(data == 'mafia'){
 setTimeout(function(){
 game_announcement.append('<div class="message">Whom do you want to kill?</div>');
 },600);
+
+if(data == 'mafia'){
 ask_mafia();
 }else{
 
@@ -1536,13 +1628,25 @@ function dacoit_start_first_vote(){
 function get_day_messages(){
 
 
+var get_user_role = $.ajax({
+url:"/get_current_user_role",
+type:"POST",
+data:{game_name:game}
+});
+
+
+
+get_user_role.done(function(data191){
+
+if(data191 == 'mafia'){
+
 get_day_messages1 = $.ajax({
 url:"/get_day_messages",
 type:"POST",
 data:{game:game}
 });
 
-get_day_messages1.done(function(data12){
+get_day_messages1.done(function(data1211){
 var messages_data;
 
 $.each(data1211,function(key,value){
@@ -1553,9 +1657,13 @@ messages_data += '<div class="left_game_chat_message_item"><span class="left_gam
 messages_data = messages_data.replace("undefined","");
 
 $('.left_game_chat_messages_container').html(messages_data);
-var scroll_height = $('.left_game_chat_messages_container')[0].scrollHeight();
+var scroll_height = $('.left_game_chat_messages_container')[0].scrollHeight;
 console.log(scroll_height);
 $('.left_game_chat_messages_container').scrollTop(scroll_height);
+});
+
+}
+
 });
 
 }
@@ -1564,13 +1672,25 @@ $('.left_game_chat_messages_container').scrollTop(scroll_height);
 function get_night_messages(){
 
 
+var get_user_role = $.ajax({
+url:"/get_current_user_role",
+type:"POST",
+data:{game_name:game}
+});
+
+
+get_user_role.done(function(data171){
+
+
+if(data171 == 'mafia'){
+
 get_night_messages1 = $.ajax({
 url:"/get_night_messages",
 type:"POST",
 data:{game:game}
 });
 
-get_night_messages1.done(function(data12){
+get_night_messages1.done(function(data1211){
 var messages_data;
 
 $.each(data1211,function(key,value){
@@ -1581,9 +1701,12 @@ messages_data += '<div class="left_game_chat_message_item"><span class="left_gam
 messages_data = messages_data.replace("undefined","");
 
 $('.left_game_chat_messages_container').html(messages_data);
-var scroll_height = $('.left_game_chat_messages_container')[0].scrollHeight();
+var scroll_height = $('.left_game_chat_messages_container')[0].scrollHeight;
 console.log(scroll_height);
 $('.left_game_chat_messages_container').scrollTop(scroll_height);
+});
+
+}
 });
 
 }
@@ -1599,6 +1722,24 @@ $('.game_container').css({
 function add_dead_class(id){
 $("#right_game_chat_player_"+id).removeClass('player_alive');
 $("#right_game_chat_player_"+id).addClass('player_dead');
+}
+
+
+function make_players_alive(){
+
+console.log('make players alive function');
+
+var make_players_awake = $.ajax({
+url:"/make_players_awake",
+type:"POST",
+data:{game:game}
+});
+
+
+make_players_awake.done(function(data191){
+console.log(data191);
+});
+
 }
 
 
