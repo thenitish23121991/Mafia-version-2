@@ -18,6 +18,12 @@ var has_dacoit_killed_anyone;
 var has_dacoit_killed_interval;
 var get_day_messages_interval;
 var get_night_messages_interval;
+var game_announcement_popup = $('.game_announcement_notification');
+
+
+setTimeout(function(){
+show_announcement_popup();
+},3000);
 
 var game_announcement = $('.left_game_announcement');
 var game = $('.left_game_title_container').text();
@@ -241,7 +247,7 @@ get_game_messages.done(function(data1211){
 var messages_data;
 
 $.each(data1211,function(key,value){
-messages_data += '<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+value['player']+' says:</span><span class="left_game_chat_message"> '+value['message']+'</span></div>';
+messages_data += '<div class="left_game_chat_message_container"><div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+value['player']+' says:</span><span class="left_game_chat_message"> '+value['message']+'</span></div><div class="left_game_chat_message_clear"></div></div>';
 
 });
 
@@ -1298,6 +1304,7 @@ if(e.keyCode == 13){
 var message = $('.left_game_chat_textarea_input').val();
 message = message.trim();
 
+console.log('user message: '+message);
 if(message != ''){
 
 var add_game_message = $.ajax({
@@ -1310,7 +1317,7 @@ add_game_message.done(function(data12){
 
 console.log(data12);
 
-$('.left_game_chat_messages_container').append('<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div>');
+$('.left_game_chat_messages_container').append('<div class="left_game_chat_message_container current_user_message"><div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div><div class="left_game_chat_message_clear"></div></div>');
 var scroll_height = $('.left_game_chat_messages_container')[0].scrollHeight;
 $('.left_game_chat_messages_container').scrollTop(scroll_height);
 $('.left_game_chat_textarea_input').val('');
@@ -1338,7 +1345,7 @@ add_game_message.done(function(data12){
 
 console.log(data12);
 
-$('.left_game_chat_messages_container').append('<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div>');
+$('.left_game_chat_messages_container').append('<div class="left_game_chat_message_container"><div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div><div class="left_game_chat_message_clear"></div></div>');
 $('#left_game_chat_textarea_input').val('');
 var scroll_height = $('.left_game_chat_messages_container')[0].scrollHeight;
 console.log(scroll_height);
@@ -1400,7 +1407,7 @@ data:{game:game,message:message}
 add_explain_yourself_message.done(function(data12){
 
 console.log(data12);
-$('.left_game_chat_messages_container').append('<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div>');
+$('.left_game_chat_messages_container').append('<div class="left_game_chat_message_container"><div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div><div class="left_game_chat_message_clear"></div></div>');
 var scroll_height = $('.left_game_chat_messages_container')[0].scrollHeight;
 console.log(scroll_height);
 $('.left_game_chat_messages_container').scrollTop(scroll_height);
@@ -1431,7 +1438,7 @@ add_explain_yourself_message.done(function(data12){
 
 console.log(data12);
 
-$('.left_game_chat_messages_container').append('<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div>');
+$('.left_game_chat_messages_container').append('<div class="left_game_chat_message_container"><div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data12.player+' says:</span><span class="left_game_chat_message"> '+data12.message+'</span></div><div class="left_game_chat_message_clear"></div></div>');
 $('#left_game_chat_textarea_input').val('');
 
 });
@@ -1466,7 +1473,7 @@ console.log(data181);
 var messages_data = '';
 if(data181.length != 0){
 data181.forEach(function(element,index){
-messages_data += '<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data181[index].player+' says:</span><span class="left_game_chat_message"> '+data181[index].message+'</span></div>';
+messages_data += '<div class="left_game_chat_message_container"><div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+data181[index].player+' says:</span><span class="left_game_chat_message"> '+data181[index].message+'</span></div><div class="left_game_chat_message_clear"></div></div>';
 });
 messages_data = messages_data.replace("undefined","");
 $('.left_game_chat_messages_container').html(messages_data);
@@ -1544,9 +1551,10 @@ data:{game:game}
 
 get_day_messages1.done(function(data12){
 var messages_data;
+console.log('day messages: '+data12);
 
-$.each(data1211,function(key,value){
-messages_data += '<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+value['player']+' says:</span><span class="left_game_chat_message"> '+value['message']+'</span></div>';
+$.each(data12,function(key,value){
+messages_data += '<div class="left_game_chat_message_container"><div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+value['player']+' says:</span><span class="left_game_chat_message"> '+value['message']+'</span></div><div class="left_game_chat_message_clear"></div></div>';
 
 });
 
@@ -1574,7 +1582,7 @@ get_night_messages1.done(function(data12){
 var messages_data;
 
 $.each(data1211,function(key,value){
-messages_data += '<div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+value['player']+' says:</span><span class="left_game_chat_message"> '+value['message']+'</span></div>';
+messages_data += '<div class="left_game_chat_message_container"><div class="left_game_chat_message_item"><span class="left_game_chat_player_name">'+value['player']+' says:</span><span class="left_game_chat_message"> '+value['message']+'</span></div><div class="left_game_chat_message_clear"></div></div>';
 
 });
 
@@ -1599,6 +1607,14 @@ $('.game_container').css({
 function add_dead_class(id){
 $("#right_game_chat_player_"+id).removeClass('player_alive');
 $("#right_game_chat_player_"+id).addClass('player_dead');
+}
+
+
+function show_announcement_popup(){
+game_announcement_popup.addClass('visible');
+setTimeout(function(){
+game_announcement_popup.removeClass('visible');
+},5000);
 }
 
 

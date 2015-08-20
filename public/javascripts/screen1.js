@@ -1,11 +1,26 @@
 
 $(document).ready(function(){
 
+
 var page_limit = 0;
 var live_games_arr = new Array();
 var new_live_games_arr = new Array();
 var live_games_data;
 var has_game_expired_interval;
+
+
+setInterval(function(){
+var get_current_user_interval = $.ajax({
+url:"/get_current_user",
+type:"POST",
+data:{}
+});
+
+get_current_user_interval.done(function(data12){
+console.log('get current user:'+data12);
+});
+
+},1200);
 
 
 has_game_expired_interval = setInterval(function(){
@@ -22,6 +37,7 @@ console.log(data1911);
 });
 
 },6000);
+
 
 var get_live_games = $.ajax({
 url:"/get_live_games",
@@ -60,6 +76,16 @@ var game_name = $(this).children('.middle_live_games_name').text();
 game_name = game_name.trim();
 console.log(game_name);
 
+var is_user_host = $.ajax({
+url:"/is_current_user_host",
+type:"POST",
+data:{game:game_name}
+
+});
+
+is_user_host.done(function(data121){
+
+if(data121 == 'yes'){
 var add_player_to_game = $.ajax({
 url:"/add_player_to_game",
 type:"POST",
@@ -75,6 +101,11 @@ if(data == 'player count exceeded'){
 }else{
 location.href = '/screen2?game='+game_name;
 }
+});
+}else{
+location.href = '/screen2?game='+game_name;
+}
+
 });
 
 });
@@ -98,9 +129,19 @@ load_more_games();
 
 $('.middle_live_games_item').bind('click',function(){
 
-var game_name = $(this).text();
+var game_name = $(this).children('.middle_live_games_name').text();
 game_name = game_name.trim();
 console.log(game_name);
+
+var is_current_user = $.ajax({
+url:"/is_current_user_host",
+type:"POST",
+data:{game:game_name}
+});
+
+is_current_user.done(function(data121){
+console.log('is current user:'+data121);
+if(data121 == 'yes'){
 
 var add_player_to_game = $.ajax({
 url:"/add_player_to_game",
@@ -115,8 +156,12 @@ console.log(data);
 if(data == 'player count exceeded'){
 
 }else{
-location.href = '/screen2?game='+game_name;
+
+//location.href = '/screen2?game='+game_name;
 }
+});
+}
+
 });
 
 });

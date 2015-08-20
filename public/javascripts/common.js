@@ -27,6 +27,7 @@ add_nick.done(function(data11){
 console.log(data11);
 
 if(data11 == 'nick already taken'){
+console.logs('nick already taken');
 $('.mafia_lightbox_modal').html('This nickname is taken. Please choose some other nickname.<div><button class="hide_mafia_lightbox_button">Ok</button></div>');
 $('.mafia_lightbox_modal').css({
 'z-index' : '10001',
