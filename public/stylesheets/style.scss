@@ -1,0 +1,1062 @@
+*{
+margin:0px;
+padding:0px;
+}
+@font-face{
+src:url('FreightSansBook.ttf');
+font-family:'FreightSans';
+}
+@font-face{
+src:url('BrandonGrotesqueLight.ttf');
+font-family:'BGLight';
+}
+@font-face{
+src:url('BrandonGrotesqueMedium.ttf');
+font-family:'BGMedium';
+}
+@font-face{
+src:url('Lato-Lig.ttf');
+font-family:'LatoLight';
+}
+@font-face{
+src:url('OpenSans-Regular.ttf');
+font-family:'OpenSans';
+}
+@font-face{
+src:url('OpenSans-Light.ttf');
+font-family:'OpenSansLight';
+}
+@font-face{
+src:url('MuseoSansBold.ttf');
+font-family:'MuseoSansBold';
+}
+@font-face{
+src:url('fontello.ttf');
+font-family:'fontello';
+}
+@font-face{
+src:url('fontello_2.ttf');
+font-family:'fontello2';
+}
+
+
+@mixin transition($prop,$time,$effect,$delay){
+transition:$prop $time $effect $delay;
+-webkit-transition:$prop $time $effect $delay;
+-moz-transition:$prop $time $effect $delay;
+-ms-transition:$prop $time $effect $delay;
+-o-transition:$prop $time $effect $delay;
+}
+
+@mixin transform($prop){
+transform:$prop;
+-webkit-transform:$prop;
+-moz-transform:$prop;
+-ms-transform:$prop;
+-o-transform:$prop;
+}
+
+$theme_color: #2ecc71;
+$theme_black_color: rgba(0,0,0,.83);
+
+html,body{
+height:100%;
+width:100%;
+}
+body{
+overflow-x:hidden;
+}
+.container{
+min-height:100%;
+width:100%;
+font-family:'BGMedium';
+background:$theme_black_color;
+position:relative;
+color:#fff;
+overflow:hidden;
+}
+.left_container{
+float:left;
+width:33%;
+position:relative;
+min-height:100%;
+}
+.middle_container{
+float:left;
+width:33%;
+position:relative;
+height:100%;
+}
+.right_container{
+float:left;
+width:33%;
+height:100%;
+position:relative;
+}
+.home_title{
+font-size:21px;
+width:100%;
+text-align:center;
+}
+.footer{
+clear:both;
+}
+.home_content_container{
+padding:23px 43px;
+font-family:'LatoLight';
+}
+.home_content_container ul li{
+padding:7px 0px;
+}
+.middle_game_container{
+font-size:42px;
+font-family:'MuseoSansBold';
+padding-top:29%;
+padding-bottom:13px;
+letter-spacing:3px;
+}
+.mafia_black{
+color:rgba(0,0,0,.43);
+}
+.middle_game_container,.middle_nick_container,.middle_other_container{
+width:100%;
+text-align:center;
+}
+.middle_nick_container, .middle_other_container{
+padding:6px 0px;
+}
+/*
+.middle_nick_input{
+padding:6px 13px;
+height:34px;
+width:240px;
+font-size:14px;
+color:#fff;
+font-family:'LatoLight';
+border:none;
+background:rgba(0,0,0,.08);
+border-bottom:2px solid rgba(0,0,0,.08);
+}
+*/
+::-webkit-input-placeholder{
+color:#fff;
+}
+::-moz-placeholder{
+color:#fff;
+}
+.middle_facebook_button{
+background:#3b5998;
+}
+.slide_up_button{
+height:52px;
+width:280px;
+color:#fff;
+font-family:'LatoLight';
+font-size:16px;
+line-height:52px;
+text-align:center;
+position:relative;
+overflow:hidden;
+cursor:pointer;
+border:none;
+border-radius:3px;
+}
+.slide_up_button span{
+position:absolute;
+top:0px;
+left:0px;
+line-height:52px;
+text-align:center;
+height:52px;
+width:280px;
+
+
+-webkit-transform:translateY(0%);
+-moz-transform:translateY(0%);
+-ms-transform:translateY(0%);
+-o-transform:translateY(0%);
+
+-webkit-transition:all .2s ease;
+-moz-transition:all .2s ease;
+-ms-transition:all .2s ease;
+-o-transition:all .2s ease;
+}
+.slide_up_button:before{
+position:absolute;
+top:0px;
+left:0px;
+top:100%;
+content:'khbkjgu';
+
+line-height:52px;
+text-align:center;
+height:52px;
+width:280px;
+
+-webkit-transition:all .2s ease;
+-moz-transition:all .2s ease;
+-ms-transition:all .2s ease;
+-o-transition:all .2s ease;
+}
+.slide_up_button:hover span{
+-webkit-transform:translateY(-100%);
+-moz-transform:translateY(-100%);
+-ms-transform:translateY(-100%);
+-o-transform:translateY(-100%);
+}
+.slide_up_button:hover:before{
+top:0%;
+}
+
+.middle_live_games_container{
+font-size:31px;
+font-family:'futura-pt_500';
+color:#fff;
+width:100%;
+text-align:center;
+margin:16px 0px;
+margin-top:26px;
+}
+.middle_games_show_button{
+background:#f19a2a;
+margin:17px 0px;
+}
+.middle_games_container{
+width:100%;
+text-align:center;
+}
+.middle_invited_title_container{
+font-size:32px;
+color:#fff;
+font-family:'futura-pt_300';
+padding:48px 0px;
+width:100%;
+text-align:center;
+}
+.centered{
+width:100%;
+text-align:center;
+}
+.middle_start_new_game_i{
+padding:13px 0px;
+}
+.light_input{
+background:rgba(0,0,0,0.08);
+border:none;
+padding:14px 27px;
+font-size:19px;
+color:#fff;
+outline:none;
+font-family:'futura-pt_300';
+}
+.middle_start_new_game_button{
+background:#3b5998;
+}
+.top_game_container{
+
+}
+.top_game_title{
+font-size:46px;
+color:#fff;
+padding:52px 0px 14px 0px;
+font-family:'futura-pt_500';
+}
+.left_game_container{
+width:84%;
+float:left;
+overflow:hidden;
+min-height:200px;
+}
+.right_game_container{
+width:230px;
+position:absolute;
+top:0px;
+min-height:130px;
+height:100%;
+right:0%;
+
+z-index:10001;
+}
+.right_game_chat_container, .right_game_chat_player_container, .right_game_chat_player_name{
+width:210px;
+}
+.right_game_chat_player_container, .right_game_chat_container{
+height:100%;
+position:relative;
+}
+.right_game_chat_player_popup{
+position:absolute;
+top:-30px;
+left:0px;
+padding:4px 6px;
+background:rgba(0,0,0,.73);
+color:#fff;
+font-family:'futura-pt_300';
+font-size:17px;
+opacity:0;
+@include transform(translateY(-30px));
+@include transition(all,.3s,ease,0s);
+}
+.right_game_chat_player_container:hover .right_game_chat_player_popup{
+opacity:1;
+@include transform(translateY(0px));
+}
+.right_game_chat_player_popup{
+
+}
+.right_game_chat_player_name{
+height:62px;
+line-height:62px;
+padding:0px 19px;
+padding-left:61px;
+font-size:18px;
+color:#333;
+font-family:'futura-pt_500';
+background:#fff;
+position:relative;
+cursor:pointer;
+width:210px;
+text-transform:uppercase;
+}
+.left_game_announcement_title{
+font-size:21px;
+color:rgba(0,0,0,.34);
+font-family:'BGLight';
+}
+.left_game_title_container{
+font-size:32px;
+color:#fff;
+font-family:'futura-pt_500';
+text-transform:uppercase;
+}
+.right_game_chat_player_name:before{
+position:absolute;
+height:10px;
+width:10px;
+border-radius:50%;
+top:26px;
+left:23px;
+content:'';
+}
+.right_game_chat_player_name.player_alive.god:before{
+background:#34ad00;
+}
+.right_game_chat_player_name.player_alive.sleeping:before{
+background:#ff7200;
+}
+.right_game_chat_player_name.player_dead:before{
+background:rgba(0,0,0,.12);
+}
+.right_game_chat_player_name.player_alive:before{
+background:rgb(16,210,99);
+}
+.game_container{
+min-height:100%;
+width:100%;
+font-family:'BGMedium';
+background:$theme_black_color; 
+position:relative;
+color:#fff;
+}
+.left_game_announcement_container{
+padding:13px 0px;
+}
+.left_game_chat_textarea, .left_game_chat_textarea_input, #left_game_chat_textarea_input, .left_game_chat_messages_container{
+width:640px;
+}
+.left_game_chat_textarea_input, #left_game_chat_textarea_input{
+margin-left:0%;
+}
+.left_game_quit_game_button{
+background:#3b5998;
+margin:23px 0px;
+
+width:140px;
+}
+.left_game_quit_game_button span{
+width:140px;
+text-align:center;
+}
+.left_game_quit_game_button:before{
+width:140px;
+text-align:center;
+}
+.left_game_chat_messages_container{
+padding:14px 2%;
+width:96%;
+}
+.right_game_chat_player_name:hover{
+background:rgba(0,0,0,.06);
+}
+.middle_home_start_container{
+padding:15px 0px;
+padding-bottom:9px;
+}
+.middle_home_start_button{
+background:#40c8bc;
+font-family:'BGLight';
+font-size:17px;
+letter-spacing:3px;
+}
+::-webkit-input-placeholder{
+color:rgba(0,0,0,.53);
+}
+:-moz-placeholder{
+color:rgba(0,0,0,.53);
+}
+.middle_title{
+font-size:33px;
+font-family:'futura-pt_500';
+}
+.middle_live_games_item, .middle_invited_game_item{
+padding:7px 0px;
+font-family:'BGMedium';
+font-size:18px;
+cursor:pointer;
+}
+.middle_games_show_container, .middle_invited_games_names{
+padding:12px 0px;
+}
+.slide_up_button:before{
+font-family:'fontello';
+color:#fff;
+content:'\e808';
+}
+.middle_start_new_game_input{
+height:20px;
+font-size:16px;
+}
+.left_game_chat_messages_container{
+height:220px;
+overflow:scroll;
+}
+.left_game_left_container{
+float:left;
+width:24%;
+height:100%;
+min-height:100px;
+}
+.left_game_right_container{
+width:40%;
+margin:0px 24%;
+height:100%;
+min-height:100px;
+overflow:hidden;
+margin-top:-50px;
+}
+.left_game_left_clear{
+clear:both;
+}
+.left_game_left_content_container{
+display:block;
+}
+.left_game_chat_textarea_input, #left_game_chat_textarea_input{
+background:#fff;
+color:#333;
+}
+.left_game_chat_textarea{
+position:relative;
+}
+.left_game_chat_send_button{
+height:100%;
+line-height:100%;
+color:#fff;
+font-family:'';
+text-align:center;
+}
+.left_game_chat_messages_container1{
+overflow:hidden;
+}
+.left_game_chat_messages_container{
+overflow:auto;
+overflow-x:hidden;
+background:#fff;
+color:#333;
+font-size:16px;
+font-family:'futura-pt_300';
+border-bottom:2px solid rgba(0,0,0,.08);
+}
+.right_game_chat_container{
+}
+.right_game_chat_player_container{
+width:100%;
+background:#fff;
+}
+.left_game_announcement_container1{
+font-size:20px;
+font-family:'LatoLight';
+color:#fff;
+padding:13px 0px;
+padding-top:18px;
+height:130px;
+text-align:center;
+background:#fff;
+overflow:hidden;
+color:#333;
+width:640px;
+margin-left:274px;
+padding:14px 27px;
+}
+.left_game_announcement{
+overflow:auto;
+height:120px;
+font-family:'futura-pt_300';
+font-size:23px;
+width:100%;
+background:rgba(0,0,0,.07);
+}
+.left_game_chat_container{
+margin-top:22px;
+position:relative;
+}
+.left_game_chat_messages_title{
+color:rgba(0,0,0,.39);
+font-family:'BGLight';
+font-size:17px;
+width:100%;
+text-align:center;
+padding:13px 0px;
+}
+.left_game_chat_textarea_input_button{
+position:absolute;
+top:0px;
+height:45px;
+right:-54px;
+background:$theme_color;
+color:#fff;
+width:80px;
+border:none;
+cursor:pointer;
+font-family:'BGLight';
+font-size:14px;
+}
+#left_game_chat_textarea_input_button{
+position:absolute;
+top:0px;
+height:45px;
+right:-54px;
+background:#3c948b;
+color:#fff;
+width:80px;
+border:none;
+cursor:pointer;
+font-family:'BGLight';
+font-size:14px;
+}
+.left_game_announcement_title{
+overflow:hidden;
+}
+.left_game_announcement_title img{
+height:23px;
+width:23px;
+}
+.left_game_announcement_god{
+margin-top:4px;
+overflow:hidden;
+display:inline-block;
+}
+.left_game_chat_player_name{
+color:#3b5998;
+}
+.left_game_chat_player_name, .left_game_chat_message{
+font-family:'futura-pt_300';
+font-size:16px;
+}
+.left_game_chat_message{
+color:#fff;
+}
+.invite_fb_friends_button{
+background:#3b5998;
+}
+.middle_invite_fb_friends_container{
+width:100%;
+text-align:center;
+margin-top:23px;
+}
+.middle_games_show_person{
+font-family:'BGMedium';
+font-size:18px;
+padding-bottom:13px;
+cursor:pointer;
+position:relative;
+}
+.middle_games_show_person:last-child{
+padding-bottom:0px;
+}
+.middle_games_show_person:hover{
+color:rgba(0,0,0,.92);
+}
+.middle_games_show_person:after{
+content:'\e80f';
+font-family:'fontello';
+color:rgba(0,0,0,.92);
+opacity:0;
+pointer-events:none;
+right:30%;
+top:2px;
+position:absolute;
+}
+.middle_games_show_person:hover:after{
+opacity:1;
+pointer-events:auto;
+}
+.game_top_container{
+font-family:'BGMedium';
+font-size:29px;
+color:#fff;
+padding:5% 0%;
+padding-bottom:2%;
+width:100%;
+text-align:center;
+}
+.game_container{
+min-height:600px;
+
+-webkit-transition:all .2s ease;
+-moz-transition:all .2s ease;
+-ms-transition:all .2s ease;
+-o-transition:all .2s ease;
+}
+.game_bottom_result{
+padding-bottom:13px;
+width:100%;
+text-align:center;
+font-size:17px;
+font-family:'LatoLight';
+}
+.game_bottom_result_icon{
+padding:0px 17px;
+}
+.game_bottom_start_again{
+width:100%;
+text-align:center;
+padding-top:23px;
+}
+.game_bottom_start_again_button{
+background:#00b488;
+text-align:center;
+}
+.game_lightbox_outer{
+position:fixed;
+background:rgba(0,0,0,.13);
+opacity:0;
+pointer-events:none;
+z-index:-5;
+height:100%;
+width:100%;
+top:0px;
+left:0px;
+
+-webkit-transition:all .2s ease;
+-moz-transition:all .2s ease;
+-ms-transition:all .2s ease;
+-o-transition:all .2s ease;
+}
+.game_lightbox_outer.visible{
+opacity:1;
+pointer-events:auto;
+z-index:10001;
+}
+.game_lightbox_container{
+position:fixed;
+top:36%;
+left:34%;
+width:28%;
+text-align:center;
+opacity:0;
+pointer-events:none;
+z-index:-5;
+background:#1abc9c;
+font-family:'LatoLight';
+font-size:19px;
+color:#fff;
+
+-webkit-transition:all .2s ease;
+-moz-transition:all .2s ease;
+-ms-transition:all .2s ease;
+-o-transition:all .2s ease;
+
+-webkit-transform:rotateY(180deg);
+-moz-transform:rotateY(180deg);
+-ms-transform:rotateY(180deg);
+-o-transform:rotateY(180deg);
+}
+.game_lightbox_title{
+font-family:'LatoLight';
+font-size:19px;
+height:50px;
+line-height:50px;
+text-align:center;
+background:rgba(0,0,0,.1);
+color:rgba(255,255,255,.45);
+width:100%;
+}
+.game_lightbox{
+padding:2%;
+}
+.game_lightbox_container.visible{
+opacity:1;
+pointer-events:auto;
+z-index:100001;
+-webkit-transform:rotateY(0deg);
+-moz-transform:rotateY(0deg);
+-ms-transform:rotateY(0deg);
+-o-transform:rotateY(0deg);
+}
+
+.game_lightbox_body{
+width:100%;
+height:80px;
+padding:15px 0px;
+overflow:hidden;
+padding-bottom:23px;
+}
+.game_lightbox_buttons{
+width:100%;
+height:50px;
+position:absolute;
+bottom:0px;
+left:0px;
+}
+.game_lightbox_buttons button{
+width:50%;
+padding:9px;
+font-family:'LatoLight';
+font-size:16px;
+color:#fff;
+background:rgba(0,0,0,.13);
+border:none;
+border-right:1px solid rgba(0,0,0,.13);
+cursor:pointer;
+}
+.ask_mafia_yes{
+width:50%;
+height:100%;
+}
+.game_chat_messages_top{
+background:#3b5998;
+height:20px;
+width:100%;
+overflow:hidden;
+border-radius:2px;
+width:340px;
+padding:0px 27px;
+}
+.ask_mafia_no{
+width:50%;
+height:100%;
+}
+.mafia_lightbox_modal{
+position:fixed;
+top:33%;
+height:15%;
+width:18%;
+left:37%;
+padding:3%;
+font-family:'LatoLight';
+color:#fff;
+background:#1abc9c;
+font-size:18px;
+line-height:32px;
+
+z-index:-5;
+pointer-events:none;
+opacity:0;
+
+-webkit-transition:all .2s ease;
+-moz-transition:all .2s ease;
+-o-transition:all .2s ease;
+-ms-transition:all .2s ease;
+}
+.invite_fb_friends_button, .middle_start_new_game_button_screen2{
+background:#3b5998;
+}
+.left_game_role_container{
+font-size:18px;
+}
+.left_game_chat_action_message{
+font-size:18px;
+font-family:'futura-pt_300';
+padding:18px 0px;
+color:rgba(255,255,255,.73);
+text-align:center;
+width:100%;
+background:#1ebcfa;
+border-radius:18px 12px;
+}
+.left_game_announcement_container{
+margin-top:9px;
+width:40%;
+margin:1px 20% 13px 24%;
+}
+.left_game_announcement_title{
+width:100%;
+text-align:center;
+font-family:'futura-pt_500';
+font-size:28px;
+background:rgba(0,0,0,.42);
+padding:11px 0px;
+color:#fff;
+margin:14px 0px;
+}
+.left_game_quit_game_container{
+margin-top:59px;
+}
+.kickout_player_element{
+color:#333;
+height:16px;
+width:16px;
+font-size:16px;
+margin-left:8px;
+}
+.middle_games_show_person_name{
+cursor:pointer;
+}
+.middle_dismiss_game_button{
+margin-top:22px;
+background:#3b5998;
+}
+.game_middle_container{
+padding:11% 30%;
+width:40%;
+height:100%;
+
+}
+.game_middle_title{
+font-family:'futura-pt_500';
+font-size:48px;
+color:#fff;
+padding:24px 0px 6px 0px;
+text-align:center;
+width:100%;
+text-transform:uppercase;
+}
+.game_middle_tagline{
+font-family:'futura-pt_300';
+font-size:28px;
+color:#fff;
+width:100%;
+text-align:center;
+padding:8px 0px 19px 0px;
+}
+.game_middle_input_container{
+padding:14px 0px;
+width:100%;
+text-align:center;
+}
+.game_middle_input_field{
+font-family:'futura-pt_300';
+font-size:18px;
+padding:14px 18px;
+color:#fff;
+width:190px;
+background:rgba(0,0,0,.24);
+border:none;
+border-radius:4px;
+outline:none;
+}
+.game_middle_button_container{
+padding:16px 0px;
+width:100%;
+text-align:center;
+}
+.game_middle_letsgo_button{
+font-family:'futura-pt_300';
+font-size:18px;
+color:#fff;
+background:#2ecc71;
+padding:13px 84px;
+border:none;
+border-radius:3px;
+cursor:pointer;
+border-bottom:2px solid #27ae60;
+}
+.game_middle_footer{
+position:fixed;
+bottom:5%;
+width:100%;
+text-align:center;
+}
+.game_middle_footer_link{
+display:inline-block;
+font-family:'futura-pt_300';
+font-size:18px;
+color:#fff;
+margin-left:36px;
+padding-bottom:4px;
+border-bottom:1px solid #fff;
+cursor:pointer;
+}
+.game_about_container{
+position:absolute;
+top:0%;
+left:0%;
+height:100%;
+width:100%;
+background:#2ecc71;
+opacity:0;
+pointer-events:none;
+z-index:1001;
+
+@include transform(translateY(100%));
+@include transition(all,.5s,cubic-bezier(.29,.91,.75,.92),0s);
+}
+.game_about_container.visible{
+opacity:1;
+pointer-events:auto;
+@include transform(translateY(0%));
+
+}
+.game_about_title{
+padding:4% 0%;
+width:100%;
+text-align:center;
+font-family:'futura-pt_500';
+font-size:48px;
+}
+.game_about_content{
+padding:1% 10%;
+width:80%;
+text-align:center;
+font-family:'futura-pt_300';
+font-size:32px;
+color:#fff;
+}
+.middle_start_new_game_title{
+font-family:'futura-pt_500';
+font-size:32px;
+color:#fff;
+}
+.middle_games_show_title{
+font-family:'futura-pt_300';
+font-size:28px;
+padding:17px 0px;
+color:#fff;
+}
+.start_new_game_option_button{
+background:$theme_color;
+margin-left:34px;
+font-family:'futura-pt_400';
+border:none;
+border-radius:3px;
+color:#fff;
+font-size:18px;
+padding:12px 42px;
+cursor:pointer;
+text-transform:uppercase;
+}
+.middle_games_show_person{
+margin:4px 34%;
+width:32%;
+background:rgba(0,0,0,.13);
+text-align:left;
+overflow:hidden;
+padding:4px 18px;
+}
+.middle_games_show_person_name{
+font-family:'futura-pt_300';
+font-size:21px;
+color:#fff;
+padding-bottom:11px;
+text-transform:uppercase;
+}
+.game_outer_container{
+height:100%;
+width:100%;
+overflow:hidden;
+}
+.game_announcement_notification{
+padding:10px 20px;
+font-family:'futura-pt_300';
+font-size:16px;
+color:#fff;
+border-radius:50%;
+background:$theme_color;
+margin-left:14px;
+
+opacity:0;
+@include transform(translateY(30px));
+@include transition(all,.3s,ease,0s);
+}
+.game_announcement_notification.visible{
+opacity:1;
+@include transform(translateY(0px));
+}
+.left_game_chat_message_container{
+width:100%;
+margin-bottom:7px;
+}
+.left_game_chat_message_clear{
+clear:both;
+}
+.left_game_chat_message_item{
+
+background:#1ebcfa;
+border-radius:18px 18px;
+padding:7px 13px;
+display:table;
+float:left;
+}
+.left_game_chat_message_item.current_user_message{
+float:right;
+}
+.game_left_menu_container{
+position:absolute;
+left:0px;
+top:0px;
+height:100%;
+width:7%;
+background:$theme_color;
+color:#fff;
+}
+.game_left_menu_container ul{
+height:100%;
+}
+.game_left_menu_item{
+height:20%;
+list-style-type:none;
+color:#fff;
+position:relative;
+border-bottom:1px solid rgba(0,0,0,.07);
+cursor:pointer;
+}
+.game_left_menu_item:before{
+position:absolute;
+top:52px;
+left:33px;
+font-family:'fontello2';
+font-size:22px;
+color:#fff;
+content:'\e892';
+}
+.game_left_menu_item:nth-child(1):before{
+content:'\e85e';
+left:40px;
+}
+.game_left_menu_item:nth-child(2):before{
+
+}
+.game_left_menu_item:nth-child(3):before{
+
+}
+.game_left_menu_item:nth-child(4):before{
+
+}
+.game_left_menu_item:nth-child(5):before{
+
+}
+.game_left_menu_item:nth-child(6):before{
+
+}
+.left_game_role_container{
+font-family:'futura-pt_300';
+font-size:21px;
+padding:4px 0px;
+color:#fff;
+width:100%;
+text-align:center;
+}
+
+.player_role{
+font-family:'futura-pt_500';
+}
