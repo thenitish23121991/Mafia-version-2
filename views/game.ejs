@@ -2,14 +2,17 @@
 <html>
 <head>
 <title>Mafia</title>
+<link rel="stylesheet" type="text/css" href="stylesheets/futura-pt.css" />
 <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
 </head>
 
 <body>
 
+<div class="game_outer_container">
 <div class="right_game_container">
 <div class="right_game_chat_container">
 <div class="right_game_chat_player_container">
+
 <% for(var i=0;i<game_users.length;i++){ %>
 <div id="right_game_chat_player_<%= game_users[i].name %>" class="right_game_chat_player_name player_<%= game_users[i].status %>">
 <%= game_users[i].name %>
@@ -23,30 +26,19 @@
 <div class="game_container">
 
 
+<div class="left_game_announcement_container centered">
 
 <div class="left_game_title_container centered">
 <%= game_name %>
 </div>
 
-<div class="left_game_announcement_container centered">
 <div class="left_game_announcement_title">
-<!-- <img src="images/god_icon.jpg" /> --> GOD SAYS:
+Game Announcements
+<span class="game_announcement_notification"></span>
 </div>
-<div class="left_game_announcement_container1">
+
 <div class="left_game_announcement">
 City go to sleep. Mafia open your eyes.
-</div>
-</div>
-</div>
-
-<div class="left_game_container">
-
-<div class="left_game_left_container">
-<div class="left_game_left_content_container">
-<div class="left_game_quit_game_container centered">
-<button name="left_game_quit_game_button" class="left_game_quit_game_button slide_up_button"><span>Quit Game</span></button>
-</div>
-&nbsp;
 </div>
 </div>
 
@@ -55,34 +47,25 @@ City go to sleep. Mafia open your eyes.
 
 <div class="left_game_chat_container">
 
-
 <div class="left_game_chat_messages_title">
-CHAT MESSAGES
-
 <% if(user_role == 'mafia'){ %>
-<span class="left_game_role_container">m</span>
+<span class="left_game_role_container">You have been assigned as a <span class="player_role">mafia</span></span>
 <% } %>
 <% if(user_role == 'citizen'){ %>
-<span class="left_game_role_container">c</span>
+<span class="left_game_role_container">You have been assigned as a <span class="player_role">citizen</span></span>
 <% } %>
 <% if(user_role == 'dacoit'){ %>
-<span class="left_game_role_container">dc</span>
+<span class="left_game_role_container">You have been assigned as a <span class="player_role">dacoit</span></span>
 <% } %>
 <% if(user_role == 'detective'){ %>
-<span class="left_game_role_container">dt</span>
+<span class="left_game_role_container">You have been assigned as a <span class="player_role">detective</span></span>
 <% } %>
 <% if(user_role == 'healer'){ %>
-<span class="left_game_role_container">hl</span>
+<span class="left_game_role_container">You have been assigned as a <span class="player_role">healer</span></span>
 <% } %>
 </div>
 
 <div class="left_game_chat_messages_container1">
-<!--
-<div class="game_chat_messages_top">
-
-</div>
-
--->
 
 <div class="left_game_chat_messages_container">
 
@@ -93,6 +76,10 @@ CHAT MESSAGES
 <div class="left_game_chat_textarea">
 <input name="left_game_chat_textarea_input" class="left_game_chat_textarea_input light_input" id="left_game_chat_textarea_input" placeholder="Send a message" />
 <button name="left_game_chat_textarea_input_button" class="left_game_chat_textarea_input_button" id="left_game_chat_textarea_input_button">SEND</button>
+</div>
+
+<div class="left_game_quit_game_container centered">
+<button name="left_game_quit_game_button" class="left_game_quit_game_button slide_up_button"><span>Quit Game</span></button>
 </div>
 
 </div>
@@ -118,6 +105,21 @@ Hover over a player on list bar to take action on him/her
 </div>
 
 </div>
+
+</div>
+
+
+<div class="game_left_menu_container">
+<ul>
+<li class="game_left_menu_item"></li>
+<li class="game_left_menu_item"></li>
+<li class="game_left_menu_item"></li>
+<li class="game_left_menu_item"></li>
+<li class="game_left_menu_item"></li>
+<li class="game_left_menu_item"></li>
+</ul>
+</div>
+
 
 <div class="game_lightbox_outer">
 <div class="game_lightbox_container">
