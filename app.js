@@ -230,7 +230,9 @@ res.send(docs);
 });
 
 
+
 app.post('/get_current_user',function(req,res){
+console.log('current_user: '+req.session.current_user);
 res.send(req.session.current_user);
 });
 
@@ -259,22 +261,12 @@ var game_name = req.body.game_name;
 var player_name = req.session.current_user;
 console.log('current player: '+player_name);
 game1.add_player_to_game(game_name,player_name,function(docs){
-console.log(docs);
+console.log('add player to game docs: '+docs);
 res.send(docs);
 });
 setTimeout(function(){
 get_current_role(game_name,player_name,req);
 },2000);
-});
-
-
-app.post('/is_player_alive_and_awake',function(req,res){
-var game = req.body.game;
-var player = req.session.current_user;
-game1.is_player_alive_and_awake(game,player,function(data191){
-console.log(data191);
-res.send(data191);
-});
 });
 
 
@@ -304,7 +296,7 @@ game1.is_game_ready(game,function(data){
 if(data == 'game ready'){
 req.session.current_game = game;
 console.log('session: '+req.session.current_game);
-res.send(game);
+res.send(data);
 }else{
 res.send('game not ready');
 }
@@ -657,10 +649,11 @@ app.post('/is_current_user_host',function(req,res){
 var game = req.body.game;
 var player = req.session.current_user;
 game1.is_current_user_host(game,player,function(data1991){
-console.log(data1991);
+console.log('is_current_user_host: '+data1991);
 res.send(data1991);
 });
 });
+
 
 
 app.post('/has_host_started_game',function(req,res){
@@ -801,14 +794,6 @@ var player = req.session.current_user;
 game1.is_player_dead(game,player,function(data181){
 console.log(data181);
 res.send(data181);
-});
-});
-
-app.post('/make_players_awake',function(req,res){
-var game = req.body.game;
-game1.make_players_awake(game,function(data1991){
-console.log(data1991);
-res.send(data1991);
 });
 });
 
