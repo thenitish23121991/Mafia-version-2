@@ -4,4 +4,4 @@ A multiplayer strategy game built with node.js.
 
 
 ##Preview
-![Alt text](editor.png?raw=true "Mafia") 
+![Alt text](public/images/mafia.png?raw=true "Mafia") 
