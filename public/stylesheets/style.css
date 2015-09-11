@@ -905,7 +905,7 @@ border-bottom:2px solid rgba(0,0,0,.08);
   padding: 6px 0px; }
 
 .game_about_content ul li {
-  padding-top: 26px;
+  padding-top: 18px;
   font-family: 'futura-pt_300';
   font-size: 18px;
   line-height: 34px;
@@ -937,8 +937,9 @@ border-bottom:2px solid rgba(0,0,0,.08);
   width: 100%;
   text-align: center;
   font-family: 'futura-pt_500';
-  font-size: 21px;
-  color: #fff; }
+  font-size: 28px;
+  color: #fff;
+  padding-top: 14px; }
 
 .contact_email {
   font-family: 'futura-pt_500'; }
