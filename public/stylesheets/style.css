@@ -948,7 +948,8 @@ border-bottom:2px solid rgba(0,0,0,.08);
 .game_about_contribute a {
   font-family: 'futura-pt_500';
   font-size: 18px;
-  border-bottom: 1px solid #fff; }
+  border-bottom: 1px solid #fff;
+  color: #fff; }
 
 .contact_email {
   font-family: 'futura-pt_500'; }
