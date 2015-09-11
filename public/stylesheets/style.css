@@ -864,7 +864,7 @@ border-bottom:2px solid rgba(0,0,0,.08);
   background: #2ecc71;
   opacity: 0;
   pointer-events: none;
-  z-index: 1001;
+  z-index: 10001;
   transform: translateY(100%);
   -webkit-transform: translateY(100%);
   -moz-transform: translateY(100%);
@@ -932,6 +932,13 @@ border-bottom:2px solid rgba(0,0,0,.08);
   font-size: 15px;
   color: rgba(0, 0, 0, 0.82);
   content: '\e892'; }
+
+.game_instructions_message {
+  width: 100%;
+  text-align: center;
+  font-family: 'futura-pt_500';
+  font-size: 21px;
+  color: #fff; }
 
 .contact_email {
   font-family: 'futura-pt_500'; }
