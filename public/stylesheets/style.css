@@ -909,7 +909,8 @@ border-bottom:2px solid rgba(0,0,0,.08);
   font-family: 'futura-pt_300';
   font-size: 18px;
   line-height: 34px;
-  color: #fff; }
+  color: #fff;
+  text-align: left; }
 
 .game_about_content ul li:nth-child(1) {
   padding-top: 0px; }
