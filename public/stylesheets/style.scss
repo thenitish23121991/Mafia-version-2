@@ -881,7 +881,7 @@ cursor:pointer;
 @include property1(transition,'all .2s linear 0s');
 }
 .game_middle_letsgo_button:hover{
-background:darken(#2ecc71,15%);
+background:darken(#2ecc71,7%);
 }
 .game_middle_footer{
 position:fixed;
@@ -898,6 +898,9 @@ margin-left:36px;
 padding-bottom:4px;
 border-bottom:1px solid #fff;
 cursor:pointer;
+}
+.game_middle_footer_link:nth-child(1){
+margin-left:0px;
 }
 .game_desc_container{
 position:absolute;

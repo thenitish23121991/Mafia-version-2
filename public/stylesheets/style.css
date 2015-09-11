@@ -834,7 +834,7 @@ border-bottom:2px solid rgba(0,0,0,.08);
   -o-transition: all .2s linear 0s; }
 
 .game_middle_letsgo_button:hover {
-  background: #208e4e; }
+  background: #27af61; }
 
 .game_middle_footer {
   position: fixed;
@@ -851,6 +851,9 @@ border-bottom:2px solid rgba(0,0,0,.08);
   padding-bottom: 4px;
   border-bottom: 1px solid #fff;
   cursor: pointer; }
+
+.game_middle_footer_link:nth-child(1) {
+  margin-left: 0px; }
 
 .game_desc_container {
   position: absolute;
