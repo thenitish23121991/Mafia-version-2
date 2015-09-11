@@ -938,6 +938,19 @@ font-size:21px;
 line-height:42px;
 color:#fff;
 }
+.game_about_content ul{
+padding:42px 0px;
+}
+.game_about_content ul li{
+padding-top:32px;
+font-family:'futura-pt_300';
+font-size:18px;
+line-height:34px;
+color:#fff;
+}
+.game_about_content ul li:nth-child(1){
+padding-top:0px;
+}
 .game_close_container{
 position:absolute;
 top:7%;
@@ -955,6 +968,9 @@ font-family:'';
 font-size:15px;
 color:rgba(0,0,0,.82);
 content:'\e892';
+}
+.contact_email{
+font-family:'futura-pt_500';
 }
 .middle_start_new_game_title{
 font-family:'futura-pt_500';
