@@ -8,5 +8,10 @@ $('.game_about_container').addClass('visible');
 
 });
 
+$('.game_desc_container').bind('click',function(){
+	
+$(this).removeClass('visible');	
+});
+
 
 });
