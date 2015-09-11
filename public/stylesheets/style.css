@@ -827,7 +827,14 @@ border-bottom:2px solid rgba(0,0,0,.08);
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  border-bottom: 2px solid #27ae60; }
+  transition: all .2s linear 0s;
+  -webkit-transition: all .2s linear 0s;
+  -moz-transition: all .2s linear 0s;
+  -ms-transition: all .2s linear 0s;
+  -o-transition: all .2s linear 0s; }
+
+.game_middle_letsgo_button:hover {
+  background: #208e4e; }
 
 .game_middle_footer {
   position: fixed;
@@ -887,7 +894,8 @@ border-bottom:2px solid rgba(0,0,0,.08);
   width: 80%;
   text-align: center;
   font-family: 'futura-pt_300';
-  font-size: 32px;
+  font-size: 21px;
+  line-height: 39px;
   color: #fff; }
 
 .middle_start_new_game_title {

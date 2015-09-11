@@ -48,6 +48,15 @@ transition:$prop $time $effect $delay;
 -o-transition:$prop $time $effect $delay;
 }
 
+
+@mixin property1($prop,$val){
+#{$prop}:#{$val};
+-webkit-#{$prop}:#{$val};
+-moz-#{$prop}:#{$val};
+-ms-#{$prop}:#{$val};
+-o-#{$prop}:#{$val};
+}
+
 @mixin transform($prop){
 transform:$prop;
 -webkit-transform:$prop;
@@ -869,7 +878,10 @@ padding:13px 84px;
 border:none;
 border-radius:3px;
 cursor:pointer;
-border-bottom:2px solid #27ae60;
+@include property1(transition,'all .2s linear 0s');
+}
+.game_middle_letsgo_button:hover{
+background:darken(#2ecc71,15%);
 }
 .game_middle_footer{
 position:fixed;
@@ -919,7 +931,8 @@ padding:1% 10%;
 width:80%;
 text-align:center;
 font-family:'futura-pt_300';
-font-size:32px;
+font-size:21px;
+line-height:39px;
 color:#fff;
 }
 .middle_start_new_game_title{
