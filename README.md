@@ -1,6 +1,6 @@
 # Mafia
 
-A multiplayer strategy game built with node.js.
+A multiplayer strategy game built with node.js. 
 
 
 ##Preview
