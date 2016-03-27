@@ -17,7 +17,7 @@ data:{}
 });
 
 get_current_user_interval.done(function(data12){
-console.log('get current user:'+data12);
+console.log('The current user object: '+data12);
 });
 
 },1200);
