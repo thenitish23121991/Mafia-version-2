@@ -136,6 +136,16 @@ res.send(docs2);
 });
 
 
+app.post('/get_user_comments',function(req,res){
+
+game1.get_user_comments(game_name,function(docs){
+	
+console.log('docs: '+docs);	
+});	
+	
+});
+
+
 app.get('/',function(req,res){
 res.render('index');
 });
