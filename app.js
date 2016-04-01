@@ -100,6 +100,18 @@ res.send(data19191);
 });
 
 
+app.post('/report_player',function(req,res){
+	
+ var player_id = req.body.player_id;
+ var reportee = req.body.reportee;
+ 
+ game1.report_player(player_id,reportee,function(data12){
+	 
+	console.log(data12); 
+ });
+});
+
+
 app.post('/dismiss_game',function(req,res){
 var game = req.body.game;
 game1.dismiss_game(game,function(data191){
