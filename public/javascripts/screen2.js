@@ -3,6 +3,7 @@
 $(document).ready(function(){
 
 
+get_user_comments();
 var game = $('.top_game_title').text();
 game = game.trim();
 
@@ -254,6 +255,22 @@ add_player_to_game.done(function(data){
 */
 
 });
+
+
+function get_user_comments(){
+	var get_user_comments = $.ajax({
+		url:"/get_user_comments",
+		type:"POST",
+		data:{game:game}
+		
+	});
+	
+	get_user_comments.done(function(user_comments){
+		
+		console.log(user_comments);
+	});
+	
+}
 
 
 });
