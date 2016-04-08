@@ -183,4 +183,18 @@ get_invited_games.done(function(data12){
 });
 
 
+
+var get_last_login = $.ajax({
+url:"/get_last_login",
+type:"POST",
+data:{}
+});
+
+
+get_last_login.done(function(data){
+	
+	
+});
+
+
 });
