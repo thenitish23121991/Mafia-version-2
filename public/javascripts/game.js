@@ -1618,5 +1618,14 @@ game_announcement_popup.removeClass('visible');
 }
 
 
+function check_game_cheating(messages){
+	
+if(messages.sent.length > 4){
+	
+update_game_cheating('yes');	
+}	
+}
+
+
 
 });
