@@ -273,4 +273,20 @@ function get_user_comments(){
 }
 
 
+
+function add_user_comment(game,user,comment){
+	
+	var add_user_comment = $.ajax({
+		url:"/add_user_comment",
+		type:"POST",
+		data:{game:game,user:user,comment:comment}
+	});
+	
+	add_user_comment.done(function(comment){
+		console.log(comment);
+	});
+	
+}
+
+
 });
